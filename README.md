@@ -24,3 +24,5 @@ Backend:
 - Multer
 - Cloudinary
 - Nodemailer
+
+Посмотреть react hook form
