@@ -84,7 +84,7 @@ export const useStylesSignIn = makeStyles((theme) => ({
     
 }));
 
-function SignIn() {
+export const SignIn: React.FC = (): React.ReactElement  =>  {
     //| = или
     const [visibleModal, setVisibleModal] = useState<'signIn' | 'signUp'>();
 
@@ -215,5 +215,3 @@ function SignIn() {
         </div>
     )
 }
-
-export default SignIn

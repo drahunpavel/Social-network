@@ -1,0 +1,1 @@
+npm install @types/react-router-dom - типизация для пакета
