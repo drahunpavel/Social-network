@@ -1,20 +1,20 @@
 import {
-    // Container,
-    // createStyles,
+    Container,
+    createStyles,
     Grid,
-    // InputBase,
+    InputBase,
     makeStyles,
     // Paper,
     Theme,
     // Typography,
-    // withStyles,
+    withStyles,
   } from '@material-ui/core';
   import React from 'react';
   
   import grey from '@material-ui/core/colors/grey';
 //   import { Tweet } from '../components/Tweet';
-//   import { SideMenu } from '../components/SideMenu';
-  
+  import { SideMenu } from '../Components/SideMenu';
+
   export const useHomeStyles = makeStyles((theme: Theme) => ({
     wrapper: {
       height: '100vh',
@@ -109,34 +109,35 @@ import {
     },
   }));
   
-//   const SearchTextField = withStyles(() =>
-//     createStyles({
-//       input: {
-//         borderRadius: 30,
-//         backgroundColor: '#E6ECF0',
-//         height: 45,
-//         padding: 0,
-//       },
-//     }),
-//   )(InputBase);
+  const SearchTextField = withStyles(() =>
+    createStyles({
+      input: {
+        borderRadius: 30,
+        backgroundColor: '#E6ECF0',
+        height: 45,
+        padding: 0,
+        marginTop: 25
+      },
+    }),
+  )(InputBase);
   
   export const Home = () => {
     const classes = useHomeStyles();
   
     return (
-        <section>
+        <Container className={classes.wrapper} maxWidth="lg">
             <Grid container spacing={3}>
                 <Grid item xs={3}>
-                    1
+                    <SideMenu classes={classes} />
                 </Grid>
                 <Grid item xs={6}>
                     2
                 </Grid>
                 <Grid item xs={3}>
-                    3
+                    <SearchTextField placeholder="Поиск ..." fullWidth />
                 </Grid>
             </Grid>
-        </section>
+        </Container>
     );
   };
   
