@@ -4,16 +4,17 @@ import {
     Grid,
     InputBase,
     makeStyles,
-    // Paper,
+    Paper,
     Theme,
-    // Typography,
+    Typography,
     withStyles,
   } from '@material-ui/core';
   import React from 'react';
   
   import grey from '@material-ui/core/colors/grey';
-//   import { Tweet } from '../components/Tweet';
-  import { SideMenu } from '../Components/SideMenu';
+
+    import { SideMenu } from '../Components/SideMenu';
+    import { Tweet } from '../Components/Tweet';
 
   export const useHomeStyles = makeStyles((theme: Theme) => ({
     wrapper: {
@@ -131,7 +132,25 @@ import {
                     <SideMenu classes={classes} />
                 </Grid>
                 <Grid item xs={6}>
-                    2
+                <Paper className={classes.tweetsWrapper} variant="outlined">
+                    <Paper className={classes.tweetsHeader} variant="outlined">
+                    <Typography variant="h6">Главная</Typography>
+                    </Paper>
+                    {[
+                    ...new Array(20).fill(
+                        <Tweet
+                        text="Петиция чтобы в каждой пачке сухариков всегда лежал один большой в три слоя обсыпанный химическими специями царь-сухарик."
+                        user={{
+                            fullname: 'Glafira Zhur',
+                            username: 'GlafiraZhur',
+                            avatarUrl:
+                            'https://images.unsplash.com/photo-1528914457842-1af67b57139d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
+                        }}
+                        classes={classes}
+                        />,
+                    ),
+                    ]}
+                </Paper>
                 </Grid>
                 <Grid item xs={3}>
                     <SearchTextField placeholder="Поиск ..." fullWidth />
