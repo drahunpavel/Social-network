@@ -1,7 +1,11 @@
 import { rootReducer } from './rootReducer';
-import {compose, createStore} from 'redux';
+import {applyMiddleware, compose, createStore} from 'redux';
+import createSagaMiddleware from 'redux-saga';
+import rootSaga from './saga';
+
 
 //костыль, чтобы не регулалось на __REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+//в конфиге сделал custom type definitions
 declare global {
   interface Window {
     __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
@@ -15,5 +19,8 @@ const composeEnhancers =
     console.log('--', state, action)
   };
 
+  const sagaMiddleware = createSagaMiddleware();
 
-  export const store = createStore(rootReducer, composeEnhancers());
+  export const store = createStore(rootReducer, composeEnhancers(applyMiddleware(sagaMiddleware)));
+
+  sagaMiddleware.run(rootSaga);

@@ -12,6 +12,15 @@ export interface SetTweetsActionInterface extends Action<TweetsActionsType> {
     type: TweetsActionsType.SET_TWEETS;
     payload: TweetsState['items'];
 };
+
+export interface FetchTweetsActionInterface extends Action<TweetsActionsType> {
+    type: TweetsActionsType.FETCH_TWEETS;
+};
+
+export interface SetTweetsLoadingStateActionInterface extends Action<TweetsActionsType> {
+    type: TweetsActionsType.SET_LOADING_STATE;
+    payload: LoadingState;
+  }
   
 
 export const setTweets = (payload: TweetsState['items']):SetTweetsActionInterface => ({
@@ -19,4 +28,20 @@ export const setTweets = (payload: TweetsState['items']):SetTweetsActionInterfac
     payload
 });
 
-export type TweetsActions = SetTweetsActionInterface;
+export const setTweetsLoadingState = (
+    payload: LoadingState,
+  ): SetTweetsLoadingStateActionInterface => ({
+    type: TweetsActionsType.SET_LOADING_STATE,
+    payload,
+  });
+  
+
+export const fetchTweets = (): FetchTweetsActionInterface => ({
+    type: TweetsActionsType.FETCH_TWEETS,
+});
+  
+
+export type TweetsActions = 
+    SetTweetsActionInterface | 
+    SetTweetsLoadingStateActionInterface | 
+    FetchTweetsActionInterface;
