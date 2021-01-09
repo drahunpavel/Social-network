@@ -30,6 +30,8 @@ export const Home = (): React.ReactElement => {
   const tweets = useSelector(selectTweetsItems);
   const isLoading = useSelector(selectIsTweetsLoading);
 
+  // const handleFetchTweets = () => dispatch(fetchTweets());
+
   React.useEffect(() => {
     dispatch(fetchTweets());
   }, [dispatch]);
