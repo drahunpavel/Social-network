@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {Provider} from 'react-redux';
 
 import { BrowserRouter as Router } from 'react-router-dom';
 
 import './index.css';
 import App from './App';
-
-
+import {store} from './store/store';
 
 import { ThemeProvider  } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -18,7 +18,9 @@ ReactDOM.render(
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Router>
-        <App />
+        <Provider store={store}>
+           <App />
+        </Provider>
       </Router>
     </ThemeProvider>
   </React.StrictMode>,

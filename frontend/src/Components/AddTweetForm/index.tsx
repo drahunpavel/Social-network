@@ -65,7 +65,8 @@ export const AddTweetForm: React.FC<AddTweetFormProps> = ({
               <span>{textCount}</span>
               <div className={classes.addFormCircleProgress}>
                 <CircularProgress
-                  variant="static"
+                  // variant="static"
+                  variant="determinate"
                   size={20}
                   thickness={5}
                   value={text.length >= MAX_LENGTH ? 100 : textLimitPercent}
@@ -73,7 +74,8 @@ export const AddTweetForm: React.FC<AddTweetFormProps> = ({
                 />
                 <CircularProgress
                   style={{ color: 'rgba(0, 0, 0, 0.1)' }}
-                  variant="static"
+                  // variant="static"
+                  variant="determinate"
                   size={20}
                   thickness={5}
                   value={100}

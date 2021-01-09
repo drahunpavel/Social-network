@@ -64,6 +64,8 @@ export const Home = (): React.ReactElement => {
 {[
                     ...new Array(20).fill(
                         <Tweet
+                        //todo здесь нужны целые значения для key
+                        key={ 1 + Math.random()}
                         text="Петиция чтобы в каждой пачке сухариков всегда лежал один большой в три слоя обсыпанный химическими специями царь-сухарик."
                         user={{
                             fullname: 'Glafira Zhur',
