@@ -17,22 +17,22 @@ import { Tweet } from '../../Components/Tweet';
 import { SideMenu } from '../../Components/SideMenu';
 import { useHomeStyles } from '../../pages/Home/theme';
 import { SearchTextField } from '../../Components/SearchTextField';
-// import { useDispatch, useSelector } from 'react-redux';
-// import { fetchTweets } from '../../store/ducks/tweets/actionCreators';
-// import { selectIsTweetsLoading, selectTweetsItems } from '../../store/ducks/tweets/selectors';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchTweets } from '../../store/ducks/tweets/actionCreators';
+import { selectIsTweetsLoading, selectTweetsItems } from '../../store/ducks/tweets/selectors';
 
 // TODO
 // 2. Попробовать сделать пункт "Главная" в меню
 
 export const Home = (): React.ReactElement => {
   const classes = useHomeStyles();
-  // const dispatch = useDispatch();
-  // const tweets = useSelector(selectTweetsItems);
-  // const isLoading = useSelector(selectIsTweetsLoading);
+  const dispatch = useDispatch();
+  const tweets = useSelector(selectTweetsItems);
+  const isLoading = useSelector(selectIsTweetsLoading);
 
-  // React.useEffect(() => {
-  //   dispatch(fetchTweets());
-  // }, [dispatch]);
+  React.useEffect(() => {
+    dispatch(fetchTweets());
+  }, [dispatch]);
 
   return (
     <Container className={classes.wrapper} maxWidth="lg">
@@ -51,32 +51,15 @@ export const Home = (): React.ReactElement => {
               </div>
               <div className={classes.addFormBottomLine} />
             </Paper>
-            {/* {isLoading ? (
+            {isLoading ? (
               <div className={classes.tweetsCentred}>
                 <CircularProgress />
               </div>
             ) : (
-              tweets.map((tweet) => (
+              tweets.map((tweet, idx) => (
                 <Tweet key={tweet._id} text={tweet.text} user={tweet.user} classes={classes} />
               ))
-            )} */}
-
-{[
-                    ...new Array(20).fill(
-                        <Tweet
-                        //todo здесь нужны целые значения для key
-                        key={ 1 + Math.random()}
-                        text="Петиция чтобы в каждой пачке сухариков всегда лежал один большой в три слоя обсыпанный химическими специями царь-сухарик."
-                        user={{
-                            fullname: 'Glafira Zhur',
-                            username: 'GlafiraZhur',
-                            avatarUrl:
-                            'https://images.unsplash.com/photo-1528914457842-1af67b57139d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
-                        }}
-                        classes={classes}
-                        />,
-                    ),
-                    ]}
+            )}
           </Paper>
         </Grid>
         <Grid sm={3} md={3} item>
