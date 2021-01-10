@@ -23,6 +23,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchTweets } from '../../store/ducks/tweets/actionCreators';
 import { fetchTags } from '../../store/ducks/tags/actionCreators';
 import { selectIsTweetsLoading, selectTweetsItems } from '../../store/ducks/tweets/selectors';
+import { Route } from 'react-router-dom';
 
 
 
@@ -59,15 +60,17 @@ export const Home = (): React.ReactElement => {
               </div>
               <div className={classes.addFormBottomLine} />
             </Paper>
-            {isLoading ? (
-              <div className={classes.tweetsCentred}>
-                <CircularProgress />
-              </div>
-            ) : (
-              tweets.map((tweet, idx) => (
-                <Tweet key={tweet._id} text={tweet.text} user={tweet.user} classes={classes} />
-              ))
-            )}
+            <Route path="/home" exact>
+              {isLoading ? (
+                <div className={classes.tweetsCentred}>
+                  <CircularProgress />
+                </div>
+              ) : (
+                tweets.map((tweet, idx) => (
+                  <Tweet key={tweet._id} text={tweet.text} user={tweet.user} classes={classes} />
+                ))
+              )}
+            </Route>
           </Paper>
         </Grid>
         <Grid sm={3} md={3} item>
