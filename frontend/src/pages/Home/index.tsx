@@ -19,7 +19,9 @@ import { useHomeStyles } from '../../pages/Home/theme';
 import { SearchTextField } from '../../Components/SearchTextField';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchTweets } from '../../store/ducks/tweets/actionCreators';
+import { fetchTags } from '../../store/ducks/tags/actionCreators';
 import { selectIsTweetsLoading, selectTweetsItems } from '../../store/ducks/tweets/selectors';
+
 
 // TODO
 // 2. Попробовать сделать пункт "Главная" в меню
@@ -34,6 +36,7 @@ export const Home = (): React.ReactElement => {
 
   React.useEffect(() => {
     dispatch(fetchTweets());
+    dispatch(fetchTags());
   }, [dispatch]);
 
   return (
