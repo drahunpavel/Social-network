@@ -22,6 +22,7 @@ interface SideMenuProps {
 export const SideMenu: React.FC<SideMenuProps> = ({
   classes,
 }: SideMenuProps): React.ReactElement => {
+  
   const [visibleAddTweet, setSetVisibleAddTweet] = React.useState<boolean>(false);
 
   const handleClickOpenAddTweet = () => {
