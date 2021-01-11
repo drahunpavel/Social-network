@@ -51,9 +51,17 @@ export const Home = (): React.ReactElement => {
         </Grid>
         <Grid sm={8} md={6} item>
           <Paper className={classes.tweetsWrapper} variant="outlined">
+          <Route path={['/home', '/home/search']} exact>
             <Paper className={classes.tweetsHeader} variant="outlined">
-              <Typography variant="h6">Главная</Typography>
+                <Typography variant="h6">Все посты</Typography>
             </Paper>
+          </Route>
+          <Route path="/home/tweet">
+            <Paper className={classes.tweetsHeader} variant="outlined">
+                <Typography variant="h6">Комментировать</Typography>
+            </Paper>
+          </Route>
+            {/* //todo разобраться с данным функционалом */}
             <Route path={['/home', '/home/search']} exact>
               <Paper>
                 <div className={classes.addForm}>
