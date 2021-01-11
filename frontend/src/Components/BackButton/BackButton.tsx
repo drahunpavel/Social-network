@@ -1,12 +1,11 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 
 //MU
 import { IconButton } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
 import { useHomeStyles } from '../../pages/Home/theme';
-import { useHistory } from 'react-router-dom';
-
 
 interface BackButtonProps {
     classes: ReturnType<typeof useHomeStyles>;
@@ -18,9 +17,8 @@ export const BackButton:React.FC<BackButtonProps> = ({
 
     const history = useHistory();
 
-    const handleClickButton = () => {
-        history.goBack();
-    };
+    //при клике возвращет на предыдущие состояние урла
+    const handleClickButton = () => history.goBack();
 
     return(
         <IconButton onClick={handleClickButton} className={classes.tweetsHeaderBackButton} color='primary'>
