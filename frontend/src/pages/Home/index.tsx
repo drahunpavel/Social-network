@@ -20,12 +20,15 @@ import { useHomeStyles } from '../../pages/Home/theme';
 import { SearchTextField } from '../../Components/SearchTextField';
 import { Tags } from '../../Components/Tags';
 import { BackButton } from '../../Components/BackButton/BackButton';
+import { TweetView } from '../../Components/TweetView';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchTweets } from '../../store/ducks/tweets/actionCreators';
 import { fetchTags } from '../../store/ducks/tags/actionCreators';
 import { selectIsTweetsLoading, selectTweetsItems } from '../../store/ducks/tweets/selectors';
 import { Route } from 'react-router-dom';
+import { fetchTweetData } from '../../store/ducks/tweet/actionCreators';
+
 
 
 
@@ -74,6 +77,7 @@ export const Home = (): React.ReactElement => {
                 <div className={classes.addFormBottomLine} />
               </Paper>
             </Route>
+
             <Route path="/home" exact>
               {isLoading ? (
                 <div className={classes.tweetsCentred}>
@@ -85,6 +89,9 @@ export const Home = (): React.ReactElement => {
                 ))
               )}
             </Route>
+
+            <Route path="/home/tweet/:id" component={TweetView} exact/>
+
           </Paper>
         </Grid>
         <Grid sm={3} md={3} item>

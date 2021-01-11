@@ -45,7 +45,7 @@ export const AddTweetForm: React.FC<AddTweetFormProps> = ({
         <TextareaAutosize
           onChange={handleChangeTextare}
           className={classes.addFormTextarea}
-          placeholder="Что происходит?"
+          placeholder="Что у вас нового?"
           value={text}
           rowsMax={maxRows}
         />
