@@ -91,6 +91,10 @@ export const useHomeStyles = makeStyles((theme: Theme) => ({
     height: theme.spacing(6.5),
     marginRight: 15,
   },
+  tweetWrapper: {
+    color: 'inherit',
+    textDecoration: 'none'
+  },
   tweetFooter: {
     display: 'flex',
     position: 'relative',

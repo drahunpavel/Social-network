@@ -54,12 +54,14 @@ export const Home = (): React.ReactElement => {
             <Paper className={classes.tweetsHeader} variant="outlined">
               <Typography variant="h6">Главная</Typography>
             </Paper>
-            <Paper>
-              <div className={classes.addForm}>
-                <AddTweetForm classes={classes} />
-              </div>
-              <div className={classes.addFormBottomLine} />
-            </Paper>
+            <Route path={['/home', '/home/search']} exact>
+              <Paper>
+                <div className={classes.addForm}>
+                  <AddTweetForm classes={classes} />
+                </div>
+                <div className={classes.addFormBottomLine} />
+              </Paper>
+            </Route>
             <Route path="/home" exact>
               {isLoading ? (
                 <div className={classes.tweetsCentred}>
@@ -67,7 +69,7 @@ export const Home = (): React.ReactElement => {
                 </div>
               ) : (
                 tweets.map((tweet, idx) => (
-                  <Tweet key={tweet._id} text={tweet.text} user={tweet.user} classes={classes} />
+                  <Tweet key={tweet._id} classes={classes} {...tweet}/>
                 ))
               )}
             </Route>
