@@ -4,6 +4,7 @@ import SearchIcon from '@material-ui/icons/SearchOutlined';
 import PersonAddIcon from '@material-ui/icons/PersonAddOutlined';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
+
 import ListItem from '@material-ui/core/ListItem/ListItem';
 import Divider from '@material-ui/core/Divider/Divider';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar/ListItemAvatar';
@@ -18,12 +19,14 @@ import { SideMenu } from '../../Components/SideMenu';
 import { useHomeStyles } from '../../pages/Home/theme';
 import { SearchTextField } from '../../Components/SearchTextField';
 import { Tags } from '../../Components/Tags';
+import { BackButton } from '../../Components/BackButton/BackButton';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchTweets } from '../../store/ducks/tweets/actionCreators';
 import { fetchTags } from '../../store/ducks/tags/actionCreators';
 import { selectIsTweetsLoading, selectTweetsItems } from '../../store/ducks/tweets/selectors';
 import { Route } from 'react-router-dom';
+
 
 
 
@@ -51,16 +54,17 @@ export const Home = (): React.ReactElement => {
         </Grid>
         <Grid sm={8} md={6} item>
           <Paper className={classes.tweetsWrapper} variant="outlined">
-          <Route path={['/home', '/home/search']} exact>
             <Paper className={classes.tweetsHeader} variant="outlined">
+              <Route path='/home/:any'>
+                <BackButton classes={classes}/>
+              </Route>
+              <Route path={['/home', '/home/search']} exact>
                 <Typography variant="h6">Все посты</Typography>
-            </Paper>
-          </Route>
-          <Route path="/home/tweet">
-            <Paper className={classes.tweetsHeader} variant="outlined">
+              </Route>
+              <Route path="/home/tweet">
                 <Typography variant="h6">Комментировать</Typography>
+              </Route>
             </Paper>
-          </Route>
             {/* //todo разобраться с данным функционалом */}
             <Route path={['/home', '/home/search']} exact>
               <Paper>
