@@ -1,8 +1,8 @@
-import { TweetActionsType } from './../tweet/actionCreators';
 import { TweetsApi } from './../../../services/api/tweetsApi';
 import { call, put, takeEvery, takeLatest } from "redux-saga/effects";
-import { addTweet, FetchAddTweetsActionInterface, setTweets, setTweetsLoadingState, TweetsActionsType } from "./actionCreators";
+import { addTweet, setTweets, setTweetsLoadingState } from "./actionCreators";
 import { LoadingState, Tweet } from './contracts/state';
+import { FetchAddTweetsActionInterface, TweetsActionsType } from './contracts/actionTypes';
 
 export function* fetchTweetsRequest() {
     //получаю массив твитов

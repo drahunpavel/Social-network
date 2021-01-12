@@ -1,11 +1,13 @@
 import produce, { Draft } from 'immer';
-import { TweetsActions, TweetsActionsType } from './actionCreators';
-import { LoadingState, TweetsState } from './contracts/state';
+import { TweetsActions } from './actionCreators';
+import { TweetsActionsType } from './contracts/actionTypes';
+import { LoadingState, TweetsState, AddFormState } from './contracts/state';
 
 
 const initialTweetsState: TweetsState = {
     items: [],
     loadingState: LoadingState.NEVER,
+    addFormState: AddFormState.NEVER,
 };
   
 
@@ -25,6 +27,17 @@ export const tweetsReducer = produce((draft: Draft<TweetsState>, action: TweetsA
 
     case TweetsActionsType.SET_LOADING_STATE:
       draft.loadingState = action.payload;
+      break;
+
+    case TweetsActionsType.FETCH_ADD_TWEET:
+      draft.addFormState = AddFormState.LOADING;
+      break;
+
+    case TweetsActionsType.ADD_TWEET:
+      draft.items.push(action.payload);
+
+      //после того, как новый пост добавлен, в редакс залетает статус NEVER
+      draft.addFormState = AddFormState.NEVER;
       break;
 
     default:

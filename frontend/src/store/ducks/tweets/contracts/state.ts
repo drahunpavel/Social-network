@@ -6,6 +6,13 @@ export enum LoadingState {
     NEVER = 'NEVER',
 };
 
+//состояние отправки нового поста
+export enum AddFormState {
+    LOADING = 'LOADING',
+    ERROR = 'ERROR',
+    NEVER = 'NEVER',
+};
+
 
 export interface Tweet {
     _id: string,
@@ -20,8 +27,9 @@ export interface Tweet {
 
 //этот интерфейс содержит items, который является массивом из Tweet
 export interface TweetsState {
-    items: Tweet[],
-    loadingState: LoadingState
+    items: Tweet[];
+    loadingState: LoadingState;
+    addFormState: AddFormState;
 };
 
 
