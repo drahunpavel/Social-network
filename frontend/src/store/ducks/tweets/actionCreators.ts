@@ -1,4 +1,3 @@
-
 import { 
     AddTweetsActionInterface, 
     FetchAddTweetsActionInterface, 
@@ -36,12 +35,11 @@ export const setTweetsLoadingState = (
 });
   
 
-export const setAddFormState = (
-    payload: AddFormState,
-  ): SetAddFormStateActionInterface => ({
-    type: TweetsActionsType.SET_ADD_FORM_STATE,
-    payload,
+export const setAddFormState = (payload: AddFormState): SetAddFormStateActionInterface => ({
+  type: TweetsActionsType.SET_ADD_FORM_STATE,
+  payload,  
 });
+
 
 export const fetchTweets = (): FetchTweetsActionInterface => ({
     type: TweetsActionsType.FETCH_TWEETS,
@@ -53,4 +51,5 @@ export type TweetsActions =
     SetTweetsLoadingStateActionInterface | 
     FetchTweetsActionInterface |
     AddTweetsActionInterface |
+    SetAddFormStateActionInterface |
     FetchAddTweetsActionInterface;

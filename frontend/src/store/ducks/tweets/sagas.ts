@@ -1,7 +1,7 @@
 import { TweetsApi } from './../../../services/api/tweetsApi';
 import { call, put, takeEvery, takeLatest } from "redux-saga/effects";
-import { addTweet, setTweets, setTweetsLoadingState } from "./actionCreators";
-import { LoadingState, Tweet } from './contracts/state';
+import { addTweet, setAddFormState, setTweets, setTweetsLoadingState } from "./actionCreators";
+import { LoadingState, Tweet, AddFormState } from './contracts/state';
 import { FetchAddTweetsActionInterface, TweetsActionsType } from './contracts/actionTypes';
 
 export function* fetchTweetsRequest() {
@@ -34,7 +34,9 @@ export function* fetchAddTweetRequest({payload}:FetchAddTweetsActionInterface) {
         //yield put - это как dispath в редаксе
         yield put(addTweet(items))
     }catch(error){
-        yield put(setTweetsLoadingState(LoadingState.ERROR));
+        // yield put(setTweetsLoadingState(LoadingState.ERROR));
+        //ошибка при добавлении поста, устанавливаю статус ошибки
+        yield put(setAddFormState(AddFormState.ERROR));
     }
 };
 
