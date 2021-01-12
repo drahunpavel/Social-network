@@ -10,5 +10,10 @@ export const TweetsApi = {
     fetchTweetData(id: string): Promise<Tweet[]> {
       return axios.get('/tweets?_id=' + id).then(({ data }) => data);
     },  
+    //payload: Tweet - принимает данные в виде твита
+    //Promise<Tweet> - возвращает данные в виде твита
+    addTweet(payload: Tweet): Promise<Tweet> {
+      return axios.post('/tweets', payload).then(({ data }) => data);
+    },  
   };
   

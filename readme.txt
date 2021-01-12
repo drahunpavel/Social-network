@@ -65,6 +65,7 @@ insplash - random images
 
 ------------redux-saga
 редакс токинг
+Strapi - Rest API за пару мнинут
 
 
 

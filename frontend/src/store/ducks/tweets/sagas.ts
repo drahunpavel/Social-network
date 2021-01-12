@@ -1,7 +1,8 @@
+import { TweetActionsType } from './../tweet/actionCreators';
 import { TweetsApi } from './../../../services/api/tweetsApi';
-import { call, put, takeEvery } from "redux-saga/effects";
-import { setTweets, setTweetsLoadingState, TweetsActionsType } from "./actionCreators";
-import { LoadingState } from './contracts/state';
+import { call, put, takeEvery, takeLatest } from "redux-saga/effects";
+import { addTweet, FetchAddTweetsActionInterface, setTweets, setTweetsLoadingState, TweetsActionsType } from "./actionCreators";
+import { LoadingState, Tweet } from './contracts/state';
 
 export function* fetchTweetsRequest() {
     //получаю массив твитов
@@ -15,7 +16,37 @@ export function* fetchTweetsRequest() {
     }
 };
 
+//создаю новый генератор
+export function* fetchAddTweetRequest({payload}:FetchAddTweetsActionInterface) {
+    const data: Tweet = {
+        _id: Math.random().toString(36).substr(2),
+        text: payload,
+        user: {
+          fullname: 'Brian Vaughn 🖤',
+          username: 'brian_d_vaughn',
+          avatarUrl: 'https://pbs.twimg.com/profile_images/1290320630521487362/UKVSbU2V_bigger.jpg',
+        },
+      };
+  
+    const items = yield call(TweetsApi.addTweet, data);
+    try{
+        //добавляю их в редакс
+        //yield put - это как dispath в редаксе
+        yield put(addTweet(items))
+    }catch(error){
+        yield put(setTweetsLoadingState(LoadingState.ERROR));
+    }
+};
+
+// export function* tweetsSaga() {
+//     //takeLatest - последний экшен
+//     yield takeEvery(
+//         TweetsActionsType.FETCH_TWEETS, fetchTweetsRequest,
+//         TweetsActionsType.FETCH_ADD_TWEET, addTweetRequest
+//     );
+// };
 export function* tweetsSaga() {
     //takeLatest - последний экшен
-    yield takeEvery(TweetsActionsType.FETCH_TWEETS, fetchTweetsRequest);
+    yield takeLatest(TweetsActionsType.FETCH_TWEETS, fetchTweetsRequest);
+    yield takeLatest(TweetsActionsType.FETCH_ADD_TWEET, fetchAddTweetRequest);
 };
