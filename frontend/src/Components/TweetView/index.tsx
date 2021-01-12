@@ -25,6 +25,8 @@ export const TweetView: React.FC = (): React.ReactElement | null => {
       dispatch(fetchTweetData(id));
     }
 
+    //при unmounte компонента, т.е. когда перехожу из просмотра поста к ленте новостей
+    //очищаю в редаксе объект выбранного поста
     return () => {
       dispatch(setTweetData(undefined));
     };
