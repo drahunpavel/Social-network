@@ -100,7 +100,11 @@ export const AddTweetForm: React.FC<AddTweetFormProps> = ({
             disabled={!text || text.length >= MAX_LENGTH}
             color="primary"
             variant="contained">
-            Отправить
+            {addFormState === AddFormState.LOADING ? (
+              <CircularProgress color="inherit" size={16} />
+            ) : (
+              'Отправить'
+            )}
           </Button>
         </div>
       </div>
