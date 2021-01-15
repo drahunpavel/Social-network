@@ -108,6 +108,15 @@ export const useHomeStyles = makeStyles((theme: Theme) => ({
     justifyContent: 'space-between',
     maxWidth: 450,
   },
+  fullTweetViewHeader: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  fullTweetViewText: {
+    marginTop: 20,
+    fontSize: 22,
+    wordBreak: 'break-word',
+  },
   tweetUserName: {
     color: grey[500],
   },

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 import CommentIcon from '@material-ui/icons/ChatBubbleOutlineOutlined';
@@ -19,6 +19,7 @@ interface TweetProps {
     username: string;
     avatarUrl: string;
   };
+  isTweetView: boolean;
 }
 
 export const Tweet: React.FC<TweetProps> = ({
@@ -26,7 +27,11 @@ export const Tweet: React.FC<TweetProps> = ({
   text,
   user,
   classes,
+  isTweetView
 }: TweetProps): React.ReactElement => {
+
+  console.log('--isTweetView', isTweetView)
+
   return (
     <Link className={classes.tweetWrapper} to={`/home/tweet/${_id}`}>
       <Paper className={classNames(classes.tweet, classes.tweetsHeader)} variant="outlined">
@@ -36,15 +41,29 @@ export const Tweet: React.FC<TweetProps> = ({
             src={user.avatarUrl}
           />
           <div>
-            <Typography>
-              <b>{user.fullname}</b>&nbsp;
-              <span className={classes.tweetUserName}>@{user.username}</span>&nbsp;
-              <span className={classes.tweetUserName}>·</span>&nbsp;
-              <span className={classes.tweetUserName}>1 ч</span>
-            </Typography>
-            <Typography variant="body1" gutterBottom>
-              {text}
-            </Typography>
+            {isTweetView ? 
+            <Fragment>
+              <Typography className={classes.fullTweetViewHeader}>
+                <b>{user.fullname}</b>
+                <span className={classes.tweetUserName}>@{user.username}&nbsp;·&nbsp;1 ч</span>
+              </Typography>
+              <Typography className={classes.fullTweetViewText} gutterBottom>
+                {text}
+              </Typography>
+            </Fragment>  
+            :
+            <Fragment>
+              <Typography>
+                <b>{user.fullname}</b>&nbsp;
+                <span className={classes.tweetUserName}>@{user.username}</span>&nbsp;
+                <span className={classes.tweetUserName}>·</span>&nbsp;
+                <span className={classes.tweetUserName}>1 ч</span>
+              </Typography>
+              <Typography variant="body1" gutterBottom>
+                {text}
+              </Typography>
+            </Fragment>
+          }
             <div className={classes.tweetFooter}>
               <div>
                 <IconButton>

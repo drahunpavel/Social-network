@@ -85,7 +85,7 @@ export const Home = (): React.ReactElement => {
                 </div>
               ) : (
                 tweets.map((tweet, idx) => (
-                  <Tweet key={tweet._id} classes={classes} {...tweet}/>
+                  <Tweet key={tweet._id} classes={classes} {...tweet} isTweetView={false}/>
                 ))
               )}
             </Route>

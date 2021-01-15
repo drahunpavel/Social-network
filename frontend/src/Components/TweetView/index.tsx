@@ -41,7 +41,7 @@ export const TweetView: React.FC = (): React.ReactElement | null => {
   }
 
   if (tweetData) {
-    return <Tweet classes={classes} {...tweetData} />;
+    return <Tweet classes={classes} {...tweetData} isTweetView={true}/>;
   }
 
   return null;
