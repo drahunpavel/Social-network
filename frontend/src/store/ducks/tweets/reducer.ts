@@ -38,7 +38,8 @@ export const tweetsReducer = produce((draft: Draft<TweetsState>, action: TweetsA
       break;
 
     case TweetsActionsType.ADD_TWEET:
-      draft.items.push(action.payload);
+      draft.items.splice(0, 0, action.payload);  
+    // draft.items.push(action.payload);
 
       //после того, как новый пост добавлен, в редакс залетает статус NEVER
       draft.addFormState = AddFormState.NEVER;
