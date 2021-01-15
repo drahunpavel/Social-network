@@ -30,8 +30,6 @@ export const Tweet: React.FC<TweetProps> = ({
   isTweetView
 }: TweetProps): React.ReactElement => {
 
-  console.log('--isTweetView', isTweetView)
-
   return (
     <Link className={classes.tweetWrapper} to={`/home/tweet/${_id}`}>
       <Paper className={classNames(classes.tweet, classes.tweetsHeader)} variant="outlined">
