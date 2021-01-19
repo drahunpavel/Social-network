@@ -1,15 +1,13 @@
-import express from "express";
-
+//dotenv нужно запускать в самом начале срипта
 import dotenv from "dotenv";
+dotenv.config();
+
+import express from "express";
 
 import "./core/db";
 
-import { registerValidations } from "./validations/register";
-// import { validator } from 'express-validator';
-
 import { UserController } from "./controllers/UserController";
-
-dotenv.config();
+import { registerValidations } from "./validations/register";
 
 const app = express();
 
@@ -17,19 +15,11 @@ app.use(express.json());
 
 app.get("/users", UserController.index);
 app.post("/users", registerValidations, UserController.create);
+app.get("/users/verify", registerValidations, UserController.verify);
 // app.patch('/users', UserController.update);
 // app.delete('/users', UserController.delete);
 
-// app.get('/hello', (req: express.Request, res: express.Response) => {
-// app.get('/hello', (_, res: express.Response) => {
-//     res.send('Hello');
-// });
-
-// app.get('/users', (req: express.Request, res: express.Response) => {
-//     res.send('Hello');
-// });
-
-app.listen(8081, (): void => {
+app.listen(process.env.PORT, (): void => {
   // if(err){
   //     throw new Error(err);
   // }

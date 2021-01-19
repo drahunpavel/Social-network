@@ -22,7 +22,7 @@ class _UserController {
       res.json({
         // errorCode: 110,
         status: "error",
-        message: JSON.stringify(err),
+        message: err,
       });
     }
   }
@@ -53,7 +53,7 @@ class _UserController {
 
       sendEmail(
         {
-          emailFrom: "admin@twitter.com",
+          emailFrom: "admin@soc-net.com",
           emailTo: data.email,
           subject: "Подтверждение почты social-network",
           html: `Для того, чтобы подтвердить почту, перейдите <a href="http://localhost:${
@@ -78,7 +78,47 @@ class _UserController {
     } catch (err) {
       res.json({
         status: "error",
-        message: JSON.stringify(err),
+        message: err,
+      });
+    }
+  }
+
+  async verify(req: any, res: express.Response): Promise<void> {
+    //confirmHash
+    //confirmed
+    try {
+      const hash = req.query.hash;
+
+      if (!hash) {
+        res.status(400).json({
+          status: "error",
+          message: "Missing hash",
+        });
+        return;
+      }
+
+      //нахожу пользователя по хеш-сумме
+      const user = await UserModel.findOne({ confirmHash: hash }).exec();
+
+      if (user) {
+        //меняю его состояние и сохраняю
+        user.confirmed = true;
+        user.save();
+
+        res.json({
+          status: "succes",
+          message: "OK",
+        });
+      } else {
+        res.status(404).json({
+          status: "error",
+          message: "User not found",
+        });
+      }
+    } catch (err) {
+      res.status(500).json({
+        status: "error",
+        message: err,
       });
     }
   }
