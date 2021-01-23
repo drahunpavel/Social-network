@@ -37,3 +37,6 @@ mailtrap.io использую для отправки почты
 npx kill-port 8888
 
 laravel rest API
+
+Чтобы скрыть некоторые поля в монге, но по необходимости их вытягивать,
+нужно в моделе прописать select: false, а при запросе в БД прописывать example.findOne({_id: id}).select("+password")
