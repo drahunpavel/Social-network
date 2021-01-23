@@ -1,10 +1,13 @@
 import express from "express";
 import { validationResult } from "express-validator";
+import mongoose from "mongoose";
 
 import { UserModel } from "../models/UserModel";
 
 import { generateMD5 } from "../utils/generateHash";
 import { sendEmail } from "../utils/sendEmail";
+
+const isValidObjectId = mongoose.Types.ObjectId.isValid;
 
 class _UserController {
   async index(_: any, res: express.Response): Promise<void> {
@@ -21,6 +24,42 @@ class _UserController {
     } catch (err) {
       res.json({
         // errorCode: 110,
+        status: "error",
+        message: err,
+      });
+    }
+  }
+
+  async show(req: express.Request, res: express.Response): Promise<void> {
+    try {
+      const userId = req.params.id;
+
+      if (!isValidObjectId(userId)) {
+        res.status(400).json({
+          status: "error",
+          message: "UserId is not valid",
+        });
+        return;
+        // res.status(400).send();
+      }
+
+      const user = await UserModel.findById(userId).exec();
+
+      if (!user) {
+        res.status(400).json({
+          status: "error",
+          message: "User not found",
+        });
+        return;
+      }
+
+      res.json({
+        status: "succes",
+        message: "OK",
+        data: user,
+      });
+    } catch (err) {
+      res.status(500).json({
         status: "error",
         message: err,
       });
