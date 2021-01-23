@@ -50,4 +50,13 @@ const UserSchema = new Schema({
   website: String,
 });
 
+//мидлвора для удаления полей при возвращении объекта пользователя
+UserSchema.set("toJSON", {
+  transform: function (_: any, obj: any) {
+    delete obj.password;
+    delete obj.confirmHash;
+    return obj;
+  },
+});
+
 export const UserModel = model<UserModelDocumentInterface>("User", UserSchema);

@@ -53,6 +53,8 @@ class _UserController {
         return;
       }
 
+      //в ответе можем получить пароль и хэш юзера
+
       res.json({
         status: "succes",
         message: "OK",
@@ -82,7 +84,7 @@ class _UserController {
         email: req.body.email,
         fullname: req.body.fullname,
         username: req.body.username,
-        password: req.body.password,
+        password: generateMD5(req.body.password + process.env.SECRET_KEY),
         confirmHash: generateMD5(
           process.env.SECRET_KEY || Math.random().toString()
         ),
