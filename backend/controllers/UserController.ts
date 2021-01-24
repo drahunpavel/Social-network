@@ -1,8 +1,9 @@
 import express from "express";
 import { validationResult } from "express-validator";
 import mongoose from "mongoose";
+import jwt from "jsonwebtoken";
 
-import { UserModel } from "../models/UserModel";
+import { UserModel, UserModelDocumentInterface } from "../models/UserModel";
 
 import { generateMD5 } from "../utils/generateHash";
 import { sendEmail } from "../utils/sendEmail";
@@ -160,6 +161,51 @@ class _UserController {
       res.status(500).json({
         status: "error",
         message: err,
+      });
+    }
+  }
+
+  async afterLogin(req: express.Request, res: express.Response): Promise<void> {
+    try {
+      const user = req.user
+        ? (req.user as UserModelDocumentInterface).toJSON()
+        : undefined;
+
+      res.json({
+        status: "succes",
+        message: "OK",
+        data: {
+          ...user,
+          token: jwt.sign({ data: req.user }, process.env.SECRET_KEY || "123", {
+            expiresIn: "30d",
+          }),
+        },
+      });
+    } catch (err) {
+      res.status(500).json({
+        status: "error",
+        message: err,
+      });
+    }
+  }
+
+  async getUserInfo(
+    req: express.Request,
+    res: express.Response
+  ): Promise<void> {
+    try {
+      const user = req.user
+        ? (req.user as UserModelDocumentInterface).toJSON()
+        : undefined;
+      res.json({
+        status: "success",
+        message: "OK",
+        data: user,
+      });
+    } catch (error) {
+      res.status(500).json({
+        status: "error",
+        message: error,
       });
     }
   }

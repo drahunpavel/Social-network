@@ -1,6 +1,7 @@
 import { model, Schema, Document } from "mongoose";
 
-export interface UserModelInterface {
+export interface UserModelInterface extends Document {
+  _id?: string;
   email: string;
   fullname: string;
   username: string;
@@ -12,11 +13,9 @@ export interface UserModelInterface {
   website?: string;
 }
 
-type UserModelDocumentInterface = UserModelInterface & Document;
+export type UserModelDocumentInterface = UserModelInterface & Document;
 
-//todo разобраться, что с UserModelInterface
-// const UserSchema = new Schema<UserModelInterface>({
-const UserSchema = new Schema({
+const UserSchema = new Schema<UserModelInterface>({
   email: {
     unique: true, //уникальность поля
     required: true, //обязательность поля
@@ -34,12 +33,12 @@ const UserSchema = new Schema({
   password: {
     required: true,
     type: String,
-    select: false,
+    // select: false,
   },
   confirmHash: {
     required: true,
     type: String,
-    select: false,
+    // select: false,
   },
   confirmed: {
     type: Boolean,

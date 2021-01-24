@@ -8,15 +8,23 @@ import "./core/db";
 
 import { UserController } from "./controllers/UserController";
 import { registerValidations } from "./validations/register";
+import { passport } from "./core/passport";
 
 const app = express();
 
 app.use(express.json());
+app.use(passport.initialize());
 
 app.get("/users", UserController.index);
-app.post("/users", registerValidations, UserController.create);
-app.get("/users/:id", registerValidations, UserController.show);
-app.get("/users/verify", registerValidations, UserController.verify);
+app.post("/auth/create", registerValidations, UserController.create);
+app.get("/users/me", passport.authenticate("jwt"), UserController.getUserInfo);
+app.get("/users/:id", UserController.show);
+app.get("/auth/verify", registerValidations, UserController.verify);
+app.post(
+  "/auth/login",
+  passport.authenticate("local"),
+  UserController.afterLogin
+);
 // app.patch('/users', UserController.update);
 // app.delete('/users', UserController.delete);
 

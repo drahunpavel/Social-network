@@ -2,12 +2,14 @@
 1. при регистрации пользователя, нужно проверять совпадение по никнейму, по емайлу и отображать ошибку
 
 
+    "username": "Admin",
+    "password": "admin1",
 
 
+    "username": "testUser",
+    "password": "testUser",
 
-
-
-
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImNvbmZpcm1lZCI6dHJ1ZSwiX2lkIjoiNjAwZDFjY2E2NWJjNTIxM2JjODJhYmZjIiwiZW1haWwiOiJ0ZXN0VXNlcjJAZ21haWwuY29tIiwiZnVsbG5hbWUiOiJ0ZXN0IHVzZXIiLCJ1c2VybmFtZSI6InRlc3RVc2VyIiwiX192IjowfSwiaWF0IjoxNjExNTI1Njk4LCJleHAiOjE2MTQxMTc2OTh9.g1IoerMbqPZtr0a4HmX6ZOKi9F-xcOPGoQIJxrxx_q8
 
 
 
