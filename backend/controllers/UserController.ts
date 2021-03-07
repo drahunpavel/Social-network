@@ -100,7 +100,7 @@ class _UserController {
           subject: "Подтверждение почты social-network",
           html: `Для того, чтобы подтвердить почту, перейдите <a href="http://localhost:${
             process.env.PORT || 8081
-          }/users/verify?hash=${data.confirmHash}">по этой ссылке</a>`,
+          }/auth/verify?hash=${data.confirmHash}">по этой ссылке</a>`,
         },
         (err: Error | null) => {
           if (err) {

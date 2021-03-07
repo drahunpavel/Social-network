@@ -2,6 +2,7 @@ import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
 import { Strategy as JWTstrategy, ExtractJwt } from "passport-jwt";
 import { UserModel } from "../models/UserModel";
+import { UserModelInterface } from './../models/UserModel';
 import { generateMD5 } from "../utils/generateHash";
 
 //локальная стратегия
@@ -35,13 +36,22 @@ passport.use(
   new JWTstrategy(
     {
       secretOrKey: process.env.SECRET_KEY || "123",
-      jwtFromRequest: ExtractJwt.fromUrlQueryParameter("token"),
+      jwtFromRequest: ExtractJwt.fromHeader("token"), //теперь токен будет передаваться в хедаре каждого запроса
     },
-    async (payload, done) => {
+    async (payload: {data: UserModelInterface}, done) => {
       try {
-        return done(null, payload.user);
+        //нахожу пользователя из БД по id. json token каждый раз расшифровывается, если ключи совпадают 
+        const user = await UserModel.findById(payload.data._id).exec();
+
+        //если пользователь найден, просто возращается информация о нем
+        if(user){
+          done (null, user);
+        };
+
+        //если пользователя нет, возращается false
+        done(null, false);
       } catch (error) {
-        done(error);
+        done(error, false);
       }
     }
   )

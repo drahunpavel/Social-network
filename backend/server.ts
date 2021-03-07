@@ -17,8 +17,11 @@ app.use(passport.initialize());
 
 app.get("/users", UserController.index);
 app.post("/auth/create", registerValidations, UserController.create);
-app.get("/users/me", passport.authenticate("jwt"), UserController.getUserInfo);
+app.get("/users/me", passport.authenticate("jwt", {session: false}), UserController.getUserInfo);
 app.get("/users/:id", UserController.show);
+
+
+
 app.get("/auth/verify", registerValidations, UserController.verify);
 app.post(
   "/auth/login",
