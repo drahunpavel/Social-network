@@ -26,7 +26,7 @@ app.get("/users/:id", UserController.show);
 
 app.get('/tweets', TweetController.index);
 app.get('/tweets/:id', TweetController.show);
-app.delete('/tweets',passport.authenticate('jwt'), TweetController.delete);
+app.delete('/tweets/:id',passport.authenticate('jwt'), TweetController.delete);
 app.post('/tweets', passport.authenticate('jwt'), createTweetValidations, TweetController.create); 
 //passport.authenticate('jwt') - проверка на то, что пользователь авторизован
 // createTweetValidations - промежуточная меддлевара для валидации поста при создании, можно указыват бесконечное кол-во меддлевар 

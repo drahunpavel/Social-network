@@ -1,9 +1,10 @@
 import { model, Schema, Document } from "mongoose";
+import { UserModelDocumentInterface } from "./UserModel";
 
 export interface TweetModelInterface {
   _id?: string;
   text: string;
-  user: string;
+  user: UserModelDocumentInterface | string;
 };
 
 // отдельный интерфейс, который содержит и TweetModelInterface, и Document-интерфейс из mongoose
