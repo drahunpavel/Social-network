@@ -7,8 +7,12 @@ import express from "express";
 import "./core/db";
 
 import { UserController } from "./controllers/UserController";
+import { TweetController } from "./controllers/TweetsController";
+
 import { registerValidations } from "./validations/register";
+import { createTweetValidations } from './validations/createTweets';
 import { passport } from "./core/passport";
+
 
 const app = express();
 
@@ -20,7 +24,12 @@ app.post("/auth/create", registerValidations, UserController.create);
 app.get("/users/me", passport.authenticate("jwt", {session: false}), UserController.getUserInfo);
 app.get("/users/:id", UserController.show);
 
-
+app.get('/tweets', TweetController.index);
+app.get('/tweets/:id', TweetController.show);
+app.delete('/tweets',passport.authenticate('jwt'), TweetController.delete);
+app.post('/tweets', passport.authenticate('jwt'), createTweetValidations, TweetController.create); 
+//passport.authenticate('jwt') - проверка на то, что пользователь авторизован
+// createTweetValidations - промежуточная меддлевара для валидации поста при создании, можно указыват бесконечное кол-во меддлевар 
 
 app.get("/auth/verify", registerValidations, UserController.verify);
 app.post(

@@ -1,6 +1,6 @@
 import { model, Schema, Document } from "mongoose";
 
-export interface TweetModelInterface extends Document {
+export interface TweetModelInterface {
   _id?: string;
   text: string;
   user: string;
@@ -12,10 +12,11 @@ export interface TweetModelInterface extends Document {
 export type TweetModelDocumentInterface = TweetModelInterface & Document;
 
 //схема для монги
-const TweetSchema = new Schema<TweetModelInterface>({
+const TweetSchema = new Schema<TweetModelDocumentInterface>({
   text: {
     required: true, //обязательность поля
     type: String,
+    maxlength: 280,
   },
   user: {
     required: true,
