@@ -38,14 +38,14 @@ passport.use(
       secretOrKey: process.env.SECRET_KEY || "123",
       jwtFromRequest: ExtractJwt.fromHeader("token"), //теперь токен будет передаваться в хедаре каждого запроса
     },
-    async (payload: {data: UserModelInterface}, done) => {
+    async (payload: {data: UserModelInterface}, done): Promise<void> => {
       try {
         //нахожу пользователя из БД по id. json token каждый раз расшифровывается, если ключи совпадают 
         const user = await UserModel.findById(payload.data._id).exec();
 
         //если пользователь найден, просто возращается информация о нем
         if(user){
-          done (null, user);
+          return done (null, user);
         };
 
         //если пользователя нет, возращается false
