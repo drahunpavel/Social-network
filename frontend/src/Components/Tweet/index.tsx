@@ -53,7 +53,7 @@ export const Tweet: React.FC<TweetProps> = ({
                 {text}
               </Typography>
               <Typography className={classes.fullTweetViewHeader}>
-                <span className={classes.tweetUserName}>{format(new Date(createdAt), 'H:mm', { locale: ruLang })}&nbsp;&nbsp;{format(new Date(createdAt), 'dd MMM yyyy г.', { locale: ruLang })}</span>
+                <span className={classes.tweetUserName}>{format(new Date(createdAt), 'H:mm:ss', { locale: ruLang })}&nbsp;&nbsp;{format(new Date(createdAt), 'dd MMM yyyy г.', { locale: ruLang })}</span>
               </Typography>
             </Fragment>
             :
