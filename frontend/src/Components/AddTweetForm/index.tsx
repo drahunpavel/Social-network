@@ -111,7 +111,7 @@ export const AddTweetForm: React.FC<AddTweetFormProps> = ({
 
       {addFormState === AddFormState.ERROR && (
         <Alert severity="error">
-          Ошибка при добавлении твита{' '}
+          Ошибка при добавлении нового поста{' '}
           <span aria-label="emoji-plak" role="img">
             😞
           </span>

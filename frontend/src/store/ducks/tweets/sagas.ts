@@ -20,10 +20,10 @@ export function* fetchTweetsRequest() {
 //создаю новый генератор
 export function* fetchAddTweetRequest({payload: text}:FetchAddTweetsActionInterface) {
     try{
-        const items = yield call(TweetsApi.addTweet, text);
+        const item: Tweet = yield call(TweetsApi.addTweet, text);
         //добавляю их в редакс
         //yield put - это как dispath в редаксе
-        yield put(addTweet(items))
+        yield put(addTweet(item));
     }catch(error){
         // yield put(setTweetsLoadingState(LoadingState.ERROR));
         //ошибка при добавлении поста, устанавливаю статус ошибки
