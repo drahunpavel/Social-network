@@ -10,6 +10,7 @@ import { Avatar, IconButton, Paper, Typography } from '@material-ui/core';
 import { useHomeStyles } from '../../pages/Home/theme';
 import { formatDate } from '../../utils/formatDate';
 import format from 'date-fns/format';
+import ruLang from 'date-fns/locale/ru'
 
 interface TweetProps {
   _id: string,
@@ -52,7 +53,7 @@ export const Tweet: React.FC<TweetProps> = ({
                 {text}
               </Typography>
               <Typography className={classes.fullTweetViewHeader}>
-                <span className={classes.tweetUserName}>{format(new Date(createdAt), 'H:mm')}&nbsp;·&nbsp;{format(new Date(createdAt), 'dd MMM. yyyy г.')}</span>
+                <span className={classes.tweetUserName}>{format(new Date(createdAt), 'H:mm', { locale: ruLang })}&nbsp;&nbsp;{format(new Date(createdAt), 'dd MMM yyyy г.', { locale: ruLang })}</span>
               </Typography>
             </Fragment>
             :
