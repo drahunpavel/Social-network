@@ -89,7 +89,7 @@ class _TweetController {
 
             res.json({
                 status: "succes",
-                data: tweet,
+                data: await tweet.populate('user').execPopulate(),
             });
         };
     }catch(error){
