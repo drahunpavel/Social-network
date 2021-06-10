@@ -98,7 +98,7 @@ export const Home = (): React.ReactElement => {
           <div className={classes.rightSide}>
             <SearchTextField
               variant="outlined"
-              placeholder="Поиск по Твиттеру"
+              placeholder="Поиск по сети"
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
