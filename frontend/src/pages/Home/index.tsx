@@ -46,7 +46,7 @@ export const Home = (): React.ReactElement => {
 
   React.useEffect(() => {
     dispatch(fetchTweets());
-    dispatch(fetchTags());
+    // dispatch(fetchTags());
   }, [dispatch]);
 
   return (
@@ -59,7 +59,7 @@ export const Home = (): React.ReactElement => {
           <Paper className={classes.tweetsWrapper} variant="outlined">
             <Paper className={classes.tweetsHeader} variant="outlined">
               <Route path='/home/:any'>
-                <BackButton classes={classes}/>
+                <BackButton classes={classes} />
               </Route>
               <Route path={['/home', '/home/search']} exact>
                 <Typography variant="h6">Все посты</Typography>
@@ -85,12 +85,12 @@ export const Home = (): React.ReactElement => {
                 </div>
               ) : (
                 tweets.map((tweet, idx) => (
-                  <Tweet key={tweet._id} classes={classes} {...tweet} isTweetView={false}/>
+                  <Tweet key={tweet._id} classes={classes} {...tweet} isTweetView={false} />
                 ))
               )}
             </Route>
 
-            <Route path="/home/tweet/:id" component={TweetView} exact/>
+            <Route path="/home/tweet/:id" component={TweetView} exact />
 
           </Paper>
         </Grid>

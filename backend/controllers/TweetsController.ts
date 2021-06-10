@@ -10,7 +10,7 @@ class _TweetController {
   async index(_: any, res: express.Response): Promise<void> {
     //получение всех твитов из БД
     try {
-      const tweets = await TweetModel.find({}).exec();
+      const tweets = await TweetModel.find({}).populate('user').exec(); //populate('user') - добавить к каждому ответу модель user
 
       res.json({
         status: "succes",
@@ -38,7 +38,7 @@ class _TweetController {
       };
 
       //поиск в БД конкретного твита по его ID
-      const tweet = await TweetModel.findById(tweetId).exec();
+      const tweet = await TweetModel.findById(tweetId).populate('user').exec();
 
       if (!tweet) {
         // res.status(400).json({

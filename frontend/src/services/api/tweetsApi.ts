@@ -1,19 +1,32 @@
-// import { TweetsState } from './../../../store/reducers/tweets/contracts/state';
 import axios from "axios";
-import { Tweet, TweetsState } from "../../store/ducks/tweets/contracts/state";
+import { Tweet } from "../../store/ducks/tweets/contracts/state";
 
+
+export interface Response<T> {
+  status: string;
+  data: T;
+};
 
 export const TweetsApi = {
-    fetchTweets(): Promise<TweetsState['items']> {
-      return axios.get('/tweets?_sort=id&_order=desc').then(({ data }) => data);
-    },
-    fetchTweetData(id: string): Promise<Tweet[]> {
-      return axios.get('/tweets?_id=' + id).then(({ data }) => data);
-    },  
-    //payload: Tweet - принимает данные в виде твита
-    //Promise<Tweet> - возвращает данные в виде твита
-    addTweet(payload: Tweet): Promise<Tweet> {
-      return axios.post('/tweets', payload).then(({ data }) => data);
-    },  
-  };
-  
+  async fetchTweets(): Promise<Tweet[]> {
+    const { data } = await axios.get<Response<Tweet[]>>('/tweets');
+    return data.data;
+  },
+  async fetchTweetData(id: string): Promise<Tweet> {
+    const { data } = await axios.get<Response<Tweet>>('/tweets/' + id);
+    return data.data;
+  },
+  async addTweet(payload: string): Promise<Tweet> {
+    const { data } = await axios.post<Response<Tweet>>('/tweets', { text: payload });
+    return data.data;
+  },
+};
+
+
+/*
+<Response<Tweet>>('/tweets/
+
+дает понимание для axios, что в ответе ожидатается типа Response
+который содрежит status: string  и data: T, где data: T; может быть или массив с типом Tweet[], или просто тип Tweet
+
+*/
