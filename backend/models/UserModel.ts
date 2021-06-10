@@ -47,7 +47,11 @@ const UserSchema = new Schema<UserModelInterface>({
   location: String,
   about: String,
   website: String,
-});
+},
+{
+  timestamps: true
+}
+);
 
 //мидлвора для удаления полей при возвращении объекта пользователя
 UserSchema.set("toJSON", {

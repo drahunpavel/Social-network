@@ -24,7 +24,11 @@ const TweetSchema = new Schema<TweetModelDocumentInterface>({
     ref: 'User', // этот ObjectId ссылается на модель User
     type: Schema.Types.ObjectId, // ObjectId нашего пользователя
     //Schema.Types.ObjectId с помощью этой записи можно делать связь в БД между нашими моделями 
+  },
+},
+  {
+    timestamps: true
   }
-});
+);
 
 export const TweetModel = model<TweetModelDocumentInterface>("Tweet", TweetSchema);
