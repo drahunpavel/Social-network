@@ -6,11 +6,11 @@ import { Tweet } from '../tweets/contracts/state';
 
 export function* fetchTweetRequest({ payload: tweetId }:FetchTweetDataActionInterface) {
     //получаю массив твитов
-    const data: Tweet[] = yield call(TweetsApi.fetchTweetData, tweetId);
+    const data: Tweet = yield call(TweetsApi.fetchTweetData, tweetId);
     //добавляю их в редакс
     try{
         //yield put - это как dispath в редаксе
-        yield put(setTweetData(data[0]));
+        yield put(setTweetData(data));
     }catch(error){
         yield put(setTweetLoadingState(LoadingState.ERROR));
     }
