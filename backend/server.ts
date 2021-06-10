@@ -11,6 +11,7 @@ import { TweetController } from "./controllers/TweetsController";
 
 import { registerValidations } from "./validations/register";
 import { createTweetValidations } from './validations/createTweets';
+import { updateTweetValidations } from './validations/updateTweets';
 import { passport } from "./core/passport";
 
 
@@ -28,6 +29,7 @@ app.get('/tweets', TweetController.index);
 app.get('/tweets/:id', TweetController.show);
 app.delete('/tweets/:id',passport.authenticate('jwt'), TweetController.delete);
 app.post('/tweets', passport.authenticate('jwt'), createTweetValidations, TweetController.create); 
+app.patch('/tweets/:id', passport.authenticate('jwt'), updateTweetValidations, TweetController.update); 
 //passport.authenticate('jwt') - проверка на то, что пользователь авторизован
 // createTweetValidations - промежуточная меддлевара для валидации поста при создании, можно указыват бесконечное кол-во меддлевар 
 

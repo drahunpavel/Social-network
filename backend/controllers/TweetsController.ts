@@ -137,6 +137,46 @@ class _TweetController {
           });
     };
   };
+
+  async update(req: express.Request, res: express.Response): Promise<void> {
+    try{
+        const user = req.user as UserModelInterface;
+
+        if(user){
+            const tweetId = req.params.id;
+
+            //проверка на корректность id в БД
+            if (!isValidObjectId(tweetId)) {
+                res.status(400).json({
+                    status: "error",
+                    message: "TweetId is not valid",
+                });
+                return;
+            };
+
+            const tweet = await TweetModel.findById(tweetId);
+
+            //tweet.user === user._id - условие, что пользователь может удалять только свои посты
+            if(tweet){
+                if(String(tweet.user._id) == String(user._id)){
+                    const newText = req.body.text; 
+                    tweet.text = newText;
+                    tweet.save();
+                    res.send();
+                }else{
+                    res.status(403).send();
+                };
+            }else{
+                res.status(404).send();
+            };
+        };
+    }catch(error){
+        res.status(500).json({
+            status: "error",
+            message: error,
+          });
+    };
+  };
 };
 
 export const TweetController = new _TweetController();
