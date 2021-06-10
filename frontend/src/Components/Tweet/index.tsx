@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react';
+import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 import CommentIcon from '@material-ui/icons/ChatBubbleOutlineOutlined';
@@ -8,12 +8,14 @@ import ShareIcon from '@material-ui/icons/ReplyOutlined';
 
 import { Avatar, IconButton, Paper, Typography } from '@material-ui/core';
 import { useHomeStyles } from '../../pages/Home/theme';
+import { formatDate } from '../../utils/formatDate';
 
 
 interface TweetProps {
   _id: string,
   text: string;
   classes: ReturnType<typeof useHomeStyles>;
+  createdAt: string,
   user: {
     fullname: string;
     username: string;
@@ -27,65 +29,66 @@ export const Tweet: React.FC<TweetProps> = ({
   text,
   user,
   classes,
+  createdAt,
   isTweetView
 }: TweetProps): React.ReactElement => {
 
   return (
     <Link className={classes.tweetWrapper} to={`/home/tweet/${_id}`}>
       <Paper className={classNames(classes.tweet, classes.tweetsHeader)} variant="outlined">
-          <Avatar
-            className={classes.tweetAvatar}
-            alt={`Аватарка пользователя ${user.fullname}`}
-            src={user.avatarUrl}
-          />
-          <div>
-            {isTweetView ? 
+        <Avatar
+          className={classes.tweetAvatar}
+          alt={`Аватарка пользователя ${user.fullname}`}
+          src={user.avatarUrl}
+        />
+        <div>
+          {isTweetView ?
             <Fragment>
               <Typography className={classes.fullTweetViewHeader}>
                 <b>{user.fullname}</b>
-                <span className={classes.tweetUserName}>@{user.username}&nbsp;·&nbsp;1 ч</span>
+                <span className={classes.tweetUserName}>@{user.username}&nbsp;·&nbsp;{formatDate(new Date(createdAt))}</span>
               </Typography>
               <Typography className={classes.fullTweetViewText} gutterBottom>
                 {text}
               </Typography>
-            </Fragment>  
+            </Fragment>
             :
             <Fragment>
               <Typography>
                 <b>{user.fullname}</b>&nbsp;
                 <span className={classes.tweetUserName}>@{user.username}</span>&nbsp;
                 <span className={classes.tweetUserName}>·</span>&nbsp;
-                <span className={classes.tweetUserName}>1 ч</span>
+                <span className={classes.tweetUserName}>{formatDate(new Date(createdAt))}</span>
               </Typography>
               <Typography variant="body1" gutterBottom>
                 {text}
               </Typography>
             </Fragment>
           }
-            <div className={classes.tweetFooter}>
-              <div>
-                <IconButton>
-                  <CommentIcon style={{ fontSize: 20 }} />
-                </IconButton>
-                <span>1</span>
-              </div>
-              <div>
-                <IconButton>
-                  <RepostIcon style={{ fontSize: 20 }} />
-                </IconButton>
-              </div>
-              <div>
-                <IconButton>
-                  <LikeIcon style={{ fontSize: 20 }} />
-                </IconButton>
-              </div>
-              <div>
-                <IconButton>
-                  <ShareIcon style={{ fontSize: 20 }} />
-                </IconButton>
-              </div>
+          <div className={classes.tweetFooter}>
+            <div>
+              <IconButton>
+                <CommentIcon style={{ fontSize: 20 }} />
+              </IconButton>
+              <span>1</span>
+            </div>
+            <div>
+              <IconButton>
+                <RepostIcon style={{ fontSize: 20 }} />
+              </IconButton>
+            </div>
+            <div>
+              <IconButton>
+                <LikeIcon style={{ fontSize: 20 }} />
+              </IconButton>
+            </div>
+            <div>
+              <IconButton>
+                <ShareIcon style={{ fontSize: 20 }} />
+              </IconButton>
             </div>
           </div>
+        </div>
       </Paper>
     </Link>
   );
