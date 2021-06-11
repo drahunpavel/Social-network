@@ -4,7 +4,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
-import { useStylesSignIn } from '../../pages/SignIn';
+import { useStylesSignIn } from '../../pages/SignIn/SignIn';
 
 //описание интерфейса
 interface ModalBlockProps {
@@ -23,7 +23,7 @@ export const ModalBlock: React.FC<ModalBlockProps> = ({
   visible = false,
   children,
 }: ModalBlockProps): React.ReactElement | null => {
-    //если в visible, то не делаем лишних построений в дом-дерево
+  //если в visible, то не делаем лишних построений в дом-дерево
   if (!visible) {
     return null;
   }

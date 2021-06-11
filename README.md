@@ -11,7 +11,8 @@ Frontend:
 - Material UI
 - Axios
 - date-fns
-- Formik
+- react-hook-form
+- yup
 
 Backend:
 
