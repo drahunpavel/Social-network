@@ -1,16 +1,17 @@
 import React, { Fragment } from 'react';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import classNames from 'classnames';
 import CommentIcon from '@material-ui/icons/ChatBubbleOutlineOutlined';
 import RepostIcon from '@material-ui/icons/RepeatOutlined';
 import LikeIcon from '@material-ui/icons/FavoriteBorderOutlined';
 import ShareIcon from '@material-ui/icons/ReplyOutlined';
 
-import { Avatar, IconButton, Paper, Typography } from '@material-ui/core';
+import { Avatar, IconButton, Menu, MenuItem, Paper, Typography } from '@material-ui/core';
 import { useHomeStyles } from '../../pages/Home/theme';
 import { formatDate } from '../../utils/formatDate';
 import format from 'date-fns/format';
 import ruLang from 'date-fns/locale/ru'
+import MoreVertIcon from '@material-ui/icons/MoreVert'
 
 interface TweetProps {
   _id: string,
@@ -33,9 +34,29 @@ export const Tweet: React.FC<TweetProps> = ({
   createdAt,
   isTweetView
 }: TweetProps): React.ReactElement => {
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+  const history = useHistory();
+
+  const handleClickTweet = (event: React.MouseEvent<HTMLElement>): void => {
+    event.preventDefault();
+    // history.push(`/home/tweet/${_id}`);
+  };
+
+
+  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    event.stopPropagation();
+    event.preventDefault();
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
 
   return (
-    <Link className={classes.tweetWrapper} to={`/home/tweet/${_id}`}>
+    <div onClick={handleClickTweet} className={classes.tweetWrapper}>
       <Paper className={classNames(classes.tweet, classes.tweetsHeader)} variant="outlined">
         <Avatar
           className={classes.tweetAvatar}
@@ -91,9 +112,34 @@ export const Tweet: React.FC<TweetProps> = ({
                 <ShareIcon style={{ fontSize: 20 }} />
               </IconButton>
             </div>
+            <div className={''}>
+              <IconButton
+                aria-label="more"
+                aria-controls="long-menu"
+                aria-haspopup="true"
+                onClick={handleClick}
+              >
+                <MoreVertIcon />
+              </IconButton>
+              <Menu
+                id="long-menu"
+                anchorEl={anchorEl}
+                keepMounted
+                open={open}
+                onClose={handleClose}
+
+              >
+                <MenuItem onClick={handleClose}>
+                  Редактировать
+                  </MenuItem>
+                <MenuItem onClick={handleClose}>
+                  Удалить
+                  </MenuItem>
+              </Menu>
+            </div>
           </div>
         </div>
       </Paper>
-    </Link>
+    </div>
   );
 };
