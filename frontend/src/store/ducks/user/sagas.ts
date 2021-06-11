@@ -26,5 +26,5 @@ export function* fetchSignInRequest({ payload }: FetchSignInActionInterface) {
 
 export function* userSaga() {
   yield takeLatest(UserActionsType.FETCH_SIGN_IN, fetchSignInRequest);
-  yield takeLatest(UserActionsType.FETCH_SIGN_UP, fetchSignUpRequest);
+//   yield takeLatest(UserActionsType.FETCH_SIGN_UP, fetchSignUpRequest);
 }

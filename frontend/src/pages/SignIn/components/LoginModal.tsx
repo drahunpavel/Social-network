@@ -8,8 +8,11 @@ import { yupResolver } from '@hookform/resolvers/yup'; //прослойка ме
 import * as yup from "yup";
 
 import { useStylesSignIn } from '../SignIn';
-import { AuthApi } from '../../../services/api/authApi';
 import { Notification } from '../../../Components/Notification';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchSignIn } from '../../../store/ducks/user/actionCreators';
+import { selectUserStatus } from '../../../store/ducks/user/selectors';
+import { LoadingStatus } from '../../../store/types';
 
 export interface LoginModalProps {
     open: boolean;
@@ -30,22 +33,29 @@ const LoginFormSchema = yup.object().shape({
 const LoginModal: React.FC<LoginModalProps> = ({ open, onClose }): React.ReactElement => {
     const classes = useStylesSignIn();
 
+    const dispatch = useDispatch();
+
+    const loadingStatus = useSelector(selectUserStatus);
+
     const openNotificationRef = React.useRef<(text: string, type: Color) => void>(() => { });
 
     const { control, handleSubmit, formState: { errors } } = useForm<LoginModalFormProps>({
         resolver: yupResolver(LoginFormSchema)
     });
 
-    console.log('--errors', errors)
-
     const onSubmit = async (data: LoginModalFormProps) => {
-        try {
-            const userData = await AuthApi.signIn(data);
-            openNotificationRef.current('Авторизация успешна!', 'success');
-        } catch (error) {
-            openNotificationRef.current('Неверный логин или пароль', 'error');
-        };
+        dispatch(fetchSignIn(data));
     };
+
+
+    React.useEffect(() => {
+        if (loadingStatus === LoadingStatus.SUCCESS) {
+            openNotificationRef.current('Авторизация успешна!', 'success');
+            onClose();
+        } else if (loadingStatus === LoadingStatus.ERROR) {
+            openNotificationRef.current('Неверный логин или пароль', 'error');
+        }
+    }, [loadingStatus]);
 
 
     return <Notification>
