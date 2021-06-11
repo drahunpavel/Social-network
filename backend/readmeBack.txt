@@ -48,3 +48,5 @@ TODO
 Токен на 7-8 занятиях
 
 CRUD - create, read, update, delete
+
+modx вместо redux ???

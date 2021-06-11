@@ -5,6 +5,8 @@ import rootSaga from './saga';
 import { TweetsState } from './ducks/tweets/contracts/state';
 import { TagsState } from './ducks/tags/contracts/state';
 import { TweetState } from './ducks/tweet/contracts/state';
+import { UserState } from './ducks/user/contracts/state';
+
 
 //костыль, чтобы не регулалось на __REDUX_DEVTOOLS_EXTENSION_COMPOSE__
 //в конфиге сделал custom type definitions
@@ -24,6 +26,7 @@ const composeEnhancers =
     tweets: TweetsState;
     tags: TagsState,
     tweet: TweetState,
+    user: UserState,
   };
   
 

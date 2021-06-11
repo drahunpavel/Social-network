@@ -11,7 +11,7 @@ import { useStylesSignIn } from '../SignIn';
 import { AuthApi } from '../../../services/api/authApi';
 import { Notification } from '../../../Components/Notification';
 
-interface LoginModalProps {
+export interface LoginModalProps {
     open: boolean;
     onClose: () => void;
     // classes: ReturnType<typeof useStylesSignIn>;

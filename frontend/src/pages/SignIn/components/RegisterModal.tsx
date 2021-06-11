@@ -3,12 +3,16 @@ import { Button, FormControl, FormGroup, TextField } from '@material-ui/core';
 import { ModalBlock } from '../../../Components/ModalBlock';
 import { useStylesSignIn } from '../SignIn';
 
-interface RegisterModalProps {
+export interface RegisterModalProps {
     open: boolean;
     onClose: () => void;
     // classes: ReturnType<typeof useStylesSignIn>;
 };
 
+export interface RegisterModalFormProps {
+    email: string;
+    password: string;
+};
 
 const RegisterModal: React.FC<RegisterModalProps> = ({ open, onClose }): React.ReactElement => {
     const classes = useStylesSignIn();
