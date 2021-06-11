@@ -57,8 +57,8 @@ const LoginModal: React.FC<LoginModalProps> = ({ open, onClose }): React.ReactEl
                                     variant="filled"
                                     type="email"
                                     // defaultValue=""
-                                    // helperText={errors.email?.message}
-                                    // error={!!errors.email}
+                                    helperText={errors.email?.message}
+                                    error={!!errors.email}
                                     fullWidth
                                     autoFocus
                                 />
@@ -79,9 +79,9 @@ const LoginModal: React.FC<LoginModalProps> = ({ open, onClose }): React.ReactEl
                                     }}
                                     variant="filled"
                                     type="password"
-                                    // defaultValue=""
-                                    // helperText={errors.email?.message}
-                                    // error={!!errors.email}
+                                    defaultValue=""
+                                    helperText={errors.password?.message}
+                                    error={!!errors.password}
                                     fullWidth
                                 />
                             )}
