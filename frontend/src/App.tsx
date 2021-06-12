@@ -38,9 +38,10 @@ function App() {
 
   return (
     <div className="App">
+      <Route path='/SignIn' component={SignIn} exact />
       <Switch>
-        <Route path='/SignIn' component={SignIn} />
-        <Route path='/' component={Home} />
+        <Route path='/home' component={Home} />
+        {/* <Route path='/' component={Home} /> */}
       </Switch>
     </div>
   );
