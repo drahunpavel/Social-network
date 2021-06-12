@@ -103,13 +103,13 @@ export const SignIn: React.FC = (): React.ReactElement => {
           <li className={classes.blueSideListInfoItem}>
             <Typography variant="h6">
               <SearchIcon className={classes.blueSideListInfoIcon} />
-              Читайте о том, что вам интересно.
+              Читайте
             </Typography>
           </li>
           <li className={classes.blueSideListInfoItem}>
             <Typography variant="h6">
               <PeopleIcon className={classes.blueSideListInfoIcon} />
-              Узнайте, о чем говорят в мире.
+              Общайтесь
             </Typography>
           </li>
           <li className={classes.blueSideListInfoItem}>
@@ -124,10 +124,10 @@ export const SignIn: React.FC = (): React.ReactElement => {
         <div className={classes.loginSideWrapper}>
           <WifiTetheringIcon color="primary" className={classes.loginSideTwitterIcon} />
           <Typography className={classes.loginSideTitle} gutterBottom variant="h4">
-            Узнайте, что происходит в мире прямо сейчас
+            Общайтесь без ограничения!
           </Typography>
           <Typography>
-            <b>Присоединяйтесь к Твиттеру прямо сейчас!</b>
+            {/* <b>Присоединяйтесь к Твиттеру прямо сейчас!</b> */}
           </Typography>
           <br />
           <Button
