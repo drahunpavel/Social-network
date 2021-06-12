@@ -19,7 +19,6 @@ function App() {
     try {
       const { data } = await AuthApi.getMe();
       dispatch(setUserData(data));
-      // history.replace('/home');
     } catch (error) {
       console.log(error);
     }

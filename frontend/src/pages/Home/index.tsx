@@ -1,17 +1,8 @@
 import React from 'react';
 import { Container, Grid, InputAdornment, Paper, Typography } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/SearchOutlined';
-import PersonAddIcon from '@material-ui/icons/PersonAddOutlined';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-
-import ListItem from '@material-ui/core/ListItem/ListItem';
-import Divider from '@material-ui/core/Divider/Divider';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar/ListItemAvatar';
-import Avatar from '@material-ui/core/Avatar/Avatar';
-import ListItemText from '@material-ui/core/ListItemText/ListItemText';
-import List from '@material-ui/core/List/List';
-import Button from '@material-ui/core/Button/Button';
 
 import { AddTweetForm } from '../../Components/AddTweetForm';
 import { Tweet } from '../../Components/Tweet';

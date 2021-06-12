@@ -4,10 +4,6 @@ import WifiTetheringIcon from '@material-ui/icons/WifiTethering';
 import SearchIcon from '@material-ui/icons/Search';
 import PeopleIcon from '@material-ui/icons/PeopleOutline';
 import MessageIcon from '@material-ui/icons/ModeCommentOutlined';
-import FormGroup from '@material-ui/core/FormGroup';
-import FormControl from '@material-ui/core/FormControl';
-import TextField from '@material-ui/core/TextField';
-import { ModalBlock } from '../../Components/ModalBlock';
 import LoginModal from './components/LoginModal';
 import RegisterModal from './components/RegisterModal';
 
