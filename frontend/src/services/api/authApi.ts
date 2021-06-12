@@ -1,6 +1,7 @@
 import { LoginModalFormProps } from './../../pages/SignIn/components/LoginModal';
 import { axios } from '../../core/axios';
-// import { TagsState } from './../../store/ducks/tags/contracts/state';
+import { RegisterModalFormProps } from '../../pages/SignIn/components/RegisterModal';
+
 
 
 interface ResponseApi {
@@ -16,11 +17,10 @@ export const AuthApi = {
         return data;
       },
     
-    // async signIn(): Promise<void> {
-    //     const { data } = await axios.get<ResponseApi>('/auth/login');
-    //       return data.data;
-    //   },
-
+      async signUp(postData: RegisterModalFormProps): Promise<ResponseApi> {
+        const { data } = await axios.post<ResponseApi>('/auth/create', { email: postData.email, username: postData.username, fullname: postData.fullname, password: postData.password, password2: postData.password2 });
+        return data;
+      },
     async getMe(): Promise<ResponseApi> {
         const { data } = await axios.get<ResponseApi>('/users/me');
         return data;

@@ -14,17 +14,17 @@ export function* fetchSignInRequest({ payload }: FetchSignInActionInterface) {
   }
 }
 
-// export function* fetchSignUpRequest({ payload }: FetchSignUpActionInterface) {
-//   try {
-//     yield put(setUserLoadingStatus(LoadingStatus.LOADING));
-//     yield call(AuthApi.signUp, payload);
-//     yield put(setUserLoadingStatus(LoadingStatus.SUCCESS));
-//   } catch (error) {
-//     yield put(setUserLoadingStatus(LoadingStatus.ERROR));
-//   }
-// }
+export function* fetchSignUpRequest({ payload }: FetchSignUpActionInterface) {
+  try {
+    yield put(setUserLoadingStatus(LoadingStatus.LOADING));
+    yield call(AuthApi.signUp, payload);
+    yield put(setUserLoadingStatus(LoadingStatus.SUCCESS));
+  } catch (error) {
+    yield put(setUserLoadingStatus(LoadingStatus.ERROR));
+  }
+}
 
 export function* userSaga() {
   yield takeLatest(UserActionsType.FETCH_SIGN_IN, fetchSignInRequest);
-//   yield takeLatest(UserActionsType.FETCH_SIGN_UP, fetchSignUpRequest);
+  yield takeLatest(UserActionsType.FETCH_SIGN_UP, fetchSignUpRequest);
 }

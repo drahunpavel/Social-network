@@ -122,6 +122,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ open, onClose }): React.ReactEl
                                     />
                                     <Button
                                         // onClick={onClose} 
+                                        disabled={loadingStatus === LoadingStatus.LOADING}
                                         type='submit'
                                         variant="contained"
                                         color="primary"
