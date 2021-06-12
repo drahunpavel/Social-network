@@ -3,16 +3,27 @@ import { Button, FormControl, FormGroup, TextField } from '@material-ui/core';
 import { ModalBlock } from '../../../Components/ModalBlock';
 import { useStylesSignIn } from '../SignIn';
 
+import { useForm, Controller } from "react-hook-form";
+import { yupResolver } from '@hookform/resolvers/yup'; //прослойка между react-hook-form и yup
+import * as yup from "yup";
 export interface RegisterModalProps {
     open: boolean;
     onClose: () => void;
-    // classes: ReturnType<typeof useStylesSignIn>;
 };
 
 export interface RegisterModalFormProps {
-    email: string;
+    fullname: string;
+    username: string;
     password: string;
+    email: string;
 };
+
+const RegisterFormSchema = yup.object().shape({
+    email: yup.string().email('Неверная почта').required('Введите почту'),
+    fullname: yup.string().min(6, 'ПВведите полное имя').required(),
+    username: yup.string().min(6, 'Введите свой логин').required(),
+    password: yup.string().min(6, 'Минимальная длина пароля 6 символов').required(),
+});
 
 const RegisterModal: React.FC<RegisterModalProps> = ({ open, onClose }): React.ReactElement => {
     const classes = useStylesSignIn();
