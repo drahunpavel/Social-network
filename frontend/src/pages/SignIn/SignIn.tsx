@@ -8,6 +8,12 @@ import LoginModal from './components/LoginModal';
 import RegisterModal from './components/RegisterModal';
 
 export const useStylesSignIn = makeStyles((theme) => ({
+  centerRed: {
+    position: 'absolute',
+    left: '50%',
+    top: '50%',
+    transform: 'translate(-50%, -50%)',
+  },
   wrapper: {
     display: 'flex',
     height: '100vh',
