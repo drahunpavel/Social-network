@@ -6,14 +6,19 @@ import { Home } from './pages/Home';
 import { SignIn } from './pages/SignIn/SignIn';
 import { UserPage } from './pages/User';
 import { AuthApi } from './services/api/authApi';
-import { setUserData } from './store/ducks/user/actionCreators';
-import { selectIsAuth } from './store/ducks/user/selectors';
+import { fetchUserData, setUserData } from './store/ducks/user/actionCreators';
+import { selectIsAuth, selectUserStatus } from './store/ducks/user/selectors';
+import { LoadingStatus } from './store/types';
 
 function App() {
   // TODO: Поправить через саги или как-нибудь по другому, это херня
   const history = useHistory();
+
   const dispatch = useDispatch();
+
   const isAuth = useSelector(selectIsAuth);
+  const loadingStatus = useSelector(selectUserStatus);
+  const isReady = loadingStatus !== LoadingStatus.NEVER && loadingStatus !== LoadingStatus.LOADING;
 
   // TODO: Чекать если юзер не авторизован, то очищать токен и редакс
   const checkAuth = async () => {
@@ -26,17 +31,19 @@ function App() {
   }
 
   React.useEffect(() => {
-    checkAuth();
+    dispatch(fetchUserData());
   }, []);
 
+
+  //есть глобальный флаг isReady, который 
   React.useEffect(() => {
     if (isAuth) {
       history.push('/home');
     }
-    if (!isAuth) {
+    if (!isAuth && isReady) {
       history.push('/SignIn');
     }
-  }, [isAuth]);
+  }, [isAuth, isReady]);
 
 
   return (

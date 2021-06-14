@@ -1,6 +1,6 @@
 import { LoginModalFormProps } from "../../../pages/SignIn/components/LoginModal";
 import { RegisterModalFormProps } from "../../../pages/SignIn/components/RegisterModal";
-import { FetchSignInActionInterface, FetchSignUpActionInterface, SetUserDataActionInterface, SetUserLoadingStatusActionInterface, UserActionsType } from "./contracts/actionTypes";
+import { FetchSignInActionInterface, FetchSignUpActionInterface, SetUserDataActionInterface, SetUserLoadingStatusActionInterface, UserActionsType, FetchUserDataActionInterface } from "./contracts/actionTypes";
 import { UserState } from "./contracts/state";
 
 
@@ -12,6 +12,10 @@ export const setUserData = (payload: UserState['data']): SetUserDataActionInterf
 export const fetchSignIn = (payload: LoginModalFormProps): FetchSignInActionInterface => ({
   type: UserActionsType.FETCH_SIGN_IN,
   payload,
+});
+
+export const fetchUserData = (): FetchUserDataActionInterface => ({
+  type: UserActionsType.FETCH_USER_DATA,
 });
 
 export const fetchSignUp = (payload: RegisterModalFormProps): FetchSignUpActionInterface => ({
@@ -27,4 +31,5 @@ export const setUserLoadingStatus = (payload: UserState['status']): SetUserLoadi
 
 export type UserActions =
   | SetUserDataActionInterface
-  | SetUserLoadingStatusActionInterface;
+  | SetUserLoadingStatusActionInterface
+  | FetchUserDataActionInterface;
