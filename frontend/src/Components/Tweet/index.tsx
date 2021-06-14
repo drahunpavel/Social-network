@@ -40,7 +40,7 @@ export const Tweet: React.FC<TweetProps> = ({
 
   const handleClickTweet = (event: React.MouseEvent<HTMLElement>): void => {
     event.preventDefault();
-    // history.push(`/home/tweet/${_id}`);
+    history.push(`/home/tweet/${_id}`);
   };
 
 
@@ -112,7 +112,7 @@ export const Tweet: React.FC<TweetProps> = ({
                 <ShareIcon style={{ fontSize: 20 }} />
               </IconButton>
             </div>
-            <div className={''}>
+            {/* <div className={''}>
               <IconButton
                 aria-label="more"
                 aria-controls="long-menu"
@@ -136,7 +136,7 @@ export const Tweet: React.FC<TweetProps> = ({
                   Удалить
                   </MenuItem>
               </Menu>
-            </div>
+            </div> */}
           </div>
         </div>
       </Paper>
