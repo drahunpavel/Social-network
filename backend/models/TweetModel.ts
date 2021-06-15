@@ -25,6 +25,9 @@ const TweetSchema = new Schema<TweetModelDocumentInterface>({
     type: Schema.Types.ObjectId, // ObjectId нашего пользователя
     //Schema.Types.ObjectId с помощью этой записи можно делать связь в БД между нашими моделями 
   },
+  images: [{
+    type: String, //массив ссылок картинок на cloudinary
+  }]
 },
   {
     timestamps: true

@@ -204,4 +204,36 @@ export const useHomeStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     alignItems: 'center',
   },
+
+  imageList: {
+    display: 'flex',
+    alignItems: 'center',
+    marginTop: 20,
+    flexWrap: 'wrap',
+  },
+
+  imageListItem: {
+    width: 80,
+    height: 80,
+    overflow: 'hidden',
+    borderRadius: 6,
+    marginRight: 10,
+    '& img': {
+      width: '100%',
+      height: '100%',
+    },
+
+    '& svg path': {
+      fill: 'white',
+    }
+  },
+
+  removeIcon: {
+    marginTop: -60,
+    marginLeft: 50,
+    background: 'black',
+    borderRadius: 5,
+    height: 14,
+    width: 14
+  }
 }));
