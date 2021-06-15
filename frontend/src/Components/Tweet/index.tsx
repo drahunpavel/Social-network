@@ -50,9 +50,13 @@ export const Tweet: React.FC<TweetProps> = ({
     setAnchorEl(event.currentTarget);
   };
 
-  const handleClose = () => {
+
+  const handleClose = (event: React.MouseEvent<HTMLElement>) => {
+    event.stopPropagation();
+    event.preventDefault();
     setAnchorEl(null);
   };
+
 
 
   return (
@@ -112,7 +116,7 @@ export const Tweet: React.FC<TweetProps> = ({
                 <ShareIcon style={{ fontSize: 20 }} />
               </IconButton>
             </div>
-            {/* <div className={''}>
+            <div className={''}>
               <IconButton
                 aria-label="more"
                 aria-controls="long-menu"
@@ -136,7 +140,7 @@ export const Tweet: React.FC<TweetProps> = ({
                   Удалить
                   </MenuItem>
               </Menu>
-            </div> */}
+            </div>
           </div>
         </div>
       </Paper>
