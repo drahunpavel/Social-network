@@ -57,8 +57,6 @@ app.post(
   passport.authenticate("local"),
   UserController.afterLogin
 );
-// app.patch('/users', UserController.update);
-// app.delete('/users', UserController.delete);
 
 app.post('/upload', upload.single('avatar'), UploadFileController.upload); 
 
