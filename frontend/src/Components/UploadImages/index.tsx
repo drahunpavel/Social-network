@@ -4,10 +4,15 @@ import RemoveCircleIcon from '@material-ui/icons/RemoveCircle';
 import { IconButton } from '@material-ui/core';
 import { useHomeStyles } from '../../pages/Home/theme';
 
-export const UploadImages = () => {
-    const classes = useHomeStyles();
+interface UploadImagesProps {
+    images: string[];
+    onChangeImages: (callback: (prev: string[]) => string[]) => void;
+};
 
-    const [images, setImages] = useState<string[]>([]);
+export const UploadImages: React.FC<UploadImagesProps> = ({
+    images, onChangeImages
+}) => {
+    const classes = useHomeStyles();
 
     const inputRef = useRef<HTMLInputElement>(null);
 
@@ -24,13 +29,13 @@ export const UploadImages = () => {
             const file = target.files?.[0];
             if (file) {
                 const fileObj = new Blob([file]);
-                setImages(prev => [...prev, URL.createObjectURL(fileObj)]);
+                onChangeImages(prev => [...prev, URL.createObjectURL(fileObj)]);
             };
         };
     }, []);
 
     const removeImage = (url: string) => {
-        setImages(prev => prev.filter(_url => _url !== url));
+        onChangeImages(prev => prev.filter(_url => _url !== url));
     };
 
     useEffect(() => {

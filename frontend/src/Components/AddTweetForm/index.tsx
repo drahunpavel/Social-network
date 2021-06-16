@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import classNames from 'classnames';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -30,6 +30,8 @@ export const AddTweetForm: React.FC<AddTweetFormProps> = ({
   const textLimitPercent = Math.round((text.length / 280) * 100);
   const textCount = MAX_LENGTH - text.length;
 
+  const [images, setImages] = useState<string[]>([]);
+
   const dispatch = useDispatch();
 
   const addFormState = useSelector(selectAddFormState);
@@ -45,6 +47,7 @@ export const AddTweetForm: React.FC<AddTweetFormProps> = ({
     dispatch(fetchAddTweet(text));
     setText('');
   };
+
 
   return (
     <div>
@@ -64,7 +67,7 @@ export const AddTweetForm: React.FC<AddTweetFormProps> = ({
       </div>
       <div className={classes.addFormBottom}>
         <div className={classNames(classes.tweetFooter, classes.addFormBottomActions)}>
-          <UploadImages />
+          <UploadImages images={images} onChangeImages={setImages} />
           {/* <IconButton color="primary">
             <EmojiIcon style={{ fontSize: 26 }} />
           </IconButton> */}
