@@ -123,9 +123,15 @@ class _TweetController {
             if(tweet){
                 if(String(tweet.user._id) == String(user._id)){
                     tweet.remove();
-                    res.send();
+                    res.send(200).send({
+                      status: "succes",
+                      message: "Post deleted",
+                    });
                 }else{
-                    res.status(403).send();
+                    res.status(403).send({
+                      status: "error",
+                      message: "This is not your post",
+                    });
                 };
             }else{
                 res.status(404).send();

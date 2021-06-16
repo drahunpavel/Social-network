@@ -8,6 +8,7 @@ export enum TweetsActionsType {
     FETCH_ADD_TWEET = 'tweets/FETCH_ADD_TWEET',
     ADD_TWEET = 'tweets/ADD_TWEET',
     SET_ADD_FORM_STATE = 'tweets/SET_ADD_FORM_STATE',
+    REMOVE_TWEET = 'tweets/REMOVE_TWEET',
 };
   
 //interface SetTweetsActionInterface наследуется от редкакс Action
@@ -41,3 +42,9 @@ export interface SetAddFormStateActionInterface extends Action<TweetsActionsType
     type: TweetsActionsType.SET_ADD_FORM_STATE;
     payload: AddFormState;
 }
+
+export interface RemoveTweetActionInterface extends Action<TweetsActionsType> {
+    type: TweetsActionsType.REMOVE_TWEET;
+    payload: string;
+  }
+  

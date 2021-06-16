@@ -2,7 +2,7 @@ import { TweetsApi } from './../../../services/api/tweetsApi';
 import { call, put, takeLatest } from "redux-saga/effects";
 import { addTweet, setAddFormState, setTweets, setTweetsLoadingState } from "./actionCreators";
 import { LoadingState, Tweet, AddFormState } from './contracts/state';
-import { FetchAddTweetsActionInterface, TweetsActionsType } from './contracts/actionTypes';
+import { FetchAddTweetsActionInterface, RemoveTweetActionInterface, TweetsActionsType } from './contracts/actionTypes';
 
 export function* fetchTweetsRequest() {
     try{
@@ -31,6 +31,15 @@ export function* fetchAddTweetRequest({payload}:FetchAddTweetsActionInterface) {
     }
 };
 
+export function* fetchRemoveTweetRequrest({ payload }: RemoveTweetActionInterface) {
+    try {
+      yield call(TweetsApi.removeTweet, payload);
+    } catch (error) {
+      alert('Ошибка при удалении твита');
+    }
+  }
+  
+
 // export function* tweetsSaga() {
 //     //takeLatest - последний экшен
 //     yield takeEvery(
@@ -42,4 +51,5 @@ export function* tweetsSaga() {
     //takeLatest - последний экшен
     yield takeLatest(TweetsActionsType.FETCH_TWEETS, fetchTweetsRequest);
     yield takeLatest(TweetsActionsType.FETCH_ADD_TWEET, fetchAddTweetRequest);
+    yield takeLatest(TweetsActionsType.REMOVE_TWEET, fetchRemoveTweetRequrest);
 };

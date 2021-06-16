@@ -16,7 +16,8 @@ import { ImageList } from '../ImageList';
 import { ImageObj } from '../AddTweetForm';
 import mediumZoom from 'medium-zoom'
 import { selectIsTweetLoading } from '../../store/ducks/tweet/selectors';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { removeTweet } from '../../store/ducks/tweets/actionCreators';
 
 interface TweetProps {
   _id: string,
@@ -47,6 +48,8 @@ export const Tweet: React.FC<TweetProps> = ({
 
   const isLoading = useSelector(selectIsTweetLoading);
 
+  const dispatch = useDispatch();
+
   const handleClickTweet = (event: React.MouseEvent<HTMLElement>): void => {
     event.preventDefault();
     history.push(`/home/tweet/${_id}`);
@@ -65,6 +68,15 @@ export const Tweet: React.FC<TweetProps> = ({
     event.preventDefault();
     setAnchorEl(null);
   };
+
+  const handleRemove = (event: React.MouseEvent<HTMLElement>): void => {
+    handleClose(event);
+    if (window.confirm('Вы действительно хотите удалить твит?')) {
+      dispatch(removeTweet(_id));
+
+    }
+  };
+
 
   React.useEffect(() => {
     if (!isLoading && isTweetView) {
@@ -152,7 +164,7 @@ export const Tweet: React.FC<TweetProps> = ({
                 <MenuItem onClick={handleClose}>
                   Редактировать
                   </MenuItem>
-                <MenuItem onClick={handleClose}>
+                <MenuItem onClick={handleRemove}>
                   Удалить
                   </MenuItem>
               </Menu>
@@ -163,3 +175,4 @@ export const Tweet: React.FC<TweetProps> = ({
     </div>
   );
 };
+
