@@ -42,70 +42,41 @@ export const Home = (): React.ReactElement => {
   }, [dispatch]);
 
   return (
-    <Container className={classes.wrapper} maxWidth="lg">
-      <Grid container spacing={3}>
-        <Grid sm={1} md={3} item>
-          <SideMenu classes={classes} />
-        </Grid>
-        <Grid sm={8} md={6} item>
-          <Paper className={classes.tweetsWrapper} variant="outlined">
-            <Paper className={classes.tweetsHeader} variant="outlined">
-              <Route path='/home/:any'>
-                <BackButton classes={classes} />
-              </Route>
-              <Route path={['/home', '/home/search']} exact>
-                <Typography variant="h6">Все посты</Typography>
-              </Route>
-              <Route path="/home/tweet">
-                <Typography variant="h6">Комментировать</Typography>
-              </Route>
-            </Paper>
-            {/* //todo разобраться с данным функционалом */}
-            <Route path={['/home', '/home/search']} exact>
-              <Paper>
-                <div className={classes.addForm}>
-                  <AddTweetForm classes={classes} />
-                </div>
-                <div className={classes.addFormBottomLine} />
-              </Paper>
-            </Route>
-
-            <Route path="/home" exact>
-              {isLoading ? (
-                <div className={classes.tweetsCentred}>
-                  <CircularProgress />
-                </div>
-              ) : (
-                tweets.map((tweet, idx) => (
-                  <Tweet key={tweet._id} classes={classes} {...tweet} images={tweet.images} isTweetView={false} />
-                ))
-              )}
-            </Route>
-            <Route path="/home/tweet/:id" component={TweetView} exact />
-
-          </Paper>
-        </Grid>
-        <Grid sm={3} md={3} item>
-          <div className={classes.rightSide}>
-            <SearchTextField
-              variant="outlined"
-              placeholder="Поиск по сети"
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <SearchIcon />
-                  </InputAdornment>
-                ),
-              }}
-              fullWidth
-            />
-            <Tags
-              classes={classes}
-            />
-            <Users />
+    <Paper className={classes.tweetsWrapper} variant="outlined">
+      <Paper className={classes.tweetsHeader} variant="outlined">
+        <Route path='/home/:any'>
+          <BackButton classes={classes} />
+        </Route>
+        <Route path={['/home', '/home/search']} exact>
+          <Typography variant="h6">Все посты</Typography>
+        </Route>
+        <Route path="/home/tweet">
+          <Typography variant="h6">Комментировать</Typography>
+        </Route>
+      </Paper>
+      {/* //todo разобраться с данным функционалом */}
+      <Route path={['/home', '/home/search']} exact>
+        <Paper>
+          <div className={classes.addForm}>
+            <AddTweetForm classes={classes} />
           </div>
-        </Grid>
-      </Grid>
-    </Container>
+          <div className={classes.addFormBottomLine} />
+        </Paper>
+      </Route>
+
+      <Route path="/home" exact>
+        {isLoading ? (
+          <div className={classes.tweetsCentred}>
+            <CircularProgress />
+          </div>
+        ) : (
+          tweets.map((tweet, idx) => (
+            <Tweet key={tweet._id} classes={classes} {...tweet} images={tweet.images} isTweetView={false} />
+          ))
+        )}
+      </Route>
+      <Route path="/home/tweet/:id" component={TweetView} exact />
+
+    </Paper>
   );
 };

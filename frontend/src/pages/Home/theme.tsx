@@ -261,8 +261,8 @@ export const useHomeStyles = makeStyles((theme: Theme) => ({
 
   profileMenu: {
     top: 'auto !important',
-    // left: '17.5% !important',
-    left: '160px!important',
+    left: '17.5% !important',
+    // left: '160px!important',
     width: '250px !important',
     bottom: '110px !important',
     'box-shadow': '1px 1px 10px rgba(0, 0, 0, 0.08)',

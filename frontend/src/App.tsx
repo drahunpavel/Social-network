@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Switch, Route, useHistory } from 'react-router-dom';
 
 import { Home } from './pages/Home';
+import { Layout } from './pages/Layout';
 import { SignIn, useStylesSignIn } from './pages/SignIn/SignIn';
 import { UserPage } from './pages/User';
 import { AuthApi } from './services/api/authApi';
@@ -29,11 +30,13 @@ function App() {
 
   //есть глобальный флаг isReady, который 
   React.useEffect(() => {
-    if (isAuth) {
-      history.push('/home');
-    }
+    // if (isAuth) {
+    //   history.push('/home');
+    // }
     if (!isAuth && isReady) {
       history.push('/SignIn');
+    } else if (history.location.pathname === '/') {
+      history.push('/home');
     }
   }, [isAuth, isReady]);
 
@@ -53,12 +56,17 @@ function App() {
   - добавить смайлики   
   */
 
+
+
   return (
     <div className="App">
       <Switch>
         <Route path='/SignIn' component={SignIn} exact />
-        <Route path='/home' component={Home} />
-        <Route path="/user" component={UserPage} />
+        <Layout>
+          <Route path="/home" component={Home} />
+          <Route path="/user/:id" component={UserPage} exact />
+          {/* <Route path="/user/activate/:hash" component={ActivatePage} exact /> */}
+        </Layout>
       </Switch>
 
     </div>
