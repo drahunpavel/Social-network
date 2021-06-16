@@ -24,7 +24,7 @@ export const ImageList: React.FC<ImageListProps> = ({
         <div className={classes.imageList}>
             {images.map((url, index) => (
                 <div key={index} className={classes.imageListItem}>
-                    <img src={url} alt='photo' />
+                    <img src={url} alt='photo' className={'post-image'} />
                     {removeImage && <IconButton className={classes.removeIcon} onClick={(): void => removeImage(url)} >
                         <RemoveCircleIcon style={{ fontSize: 14 }} />
                     </IconButton>}

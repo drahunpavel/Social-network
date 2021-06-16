@@ -14,6 +14,9 @@ import ruLang from 'date-fns/locale/ru'
 import MoreVertIcon from '@material-ui/icons/MoreVert'
 import { ImageList } from '../ImageList';
 import { ImageObj } from '../AddTweetForm';
+import mediumZoom from 'medium-zoom'
+import { selectIsTweetLoading } from '../../store/ducks/tweet/selectors';
+import { useSelector } from 'react-redux';
 
 interface TweetProps {
   _id: string,
@@ -42,6 +45,8 @@ export const Tweet: React.FC<TweetProps> = ({
   const open = Boolean(anchorEl);
   const history = useHistory();
 
+  const isLoading = useSelector(selectIsTweetLoading);
+
   const handleClickTweet = (event: React.MouseEvent<HTMLElement>): void => {
     event.preventDefault();
     history.push(`/home/tweet/${_id}`);
@@ -60,6 +65,12 @@ export const Tweet: React.FC<TweetProps> = ({
     event.preventDefault();
     setAnchorEl(null);
   };
+
+  React.useEffect(() => {
+    if (!isLoading && isTweetView) {
+      mediumZoom('.post-image');
+    }
+  }, [isLoading, isTweetView]);
 
 
   return (

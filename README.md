@@ -13,6 +13,7 @@ Frontend:
 - date-fns
 - react-hook-form
 - yup
+- medium-zoom
 
 Backend:
 
