@@ -5,6 +5,7 @@ export interface TweetModelInterface {
   _id?: string;
   text: string;
   user: UserModelDocumentInterface | string;
+  images?: string[]
 };
 
 // отдельный интерфейс, который содержит и TweetModelInterface, и Document-интерфейс из mongoose

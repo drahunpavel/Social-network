@@ -16,7 +16,7 @@ export const setTweets = (payload: TweetsState['items']):SetTweetsActionInterfac
 });
 
 //экшен для отправки данных о твите на бэк
-export const fetchAddTweet = (payload: string):FetchAddTweetsActionInterface => ({
+export const fetchAddTweet = (payload: {text: string, images: string[]}):FetchAddTweetsActionInterface => ({
     type: TweetsActionsType.FETCH_ADD_TWEET,
     payload
 });

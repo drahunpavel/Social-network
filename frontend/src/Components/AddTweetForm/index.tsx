@@ -9,10 +9,11 @@ import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 import EmojiIcon from '@material-ui/icons/SentimentSatisfiedOutlined';
 import { useHomeStyles } from '../../pages/Home/theme';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchAddTweet } from '../../store/ducks/tweets/actionCreators';
+import { fetchAddTweet, setAddFormState } from '../../store/ducks/tweets/actionCreators';
 import { selectAddFormState } from '../../store/ducks/tweets/selectors';
 import { AddFormState } from '../../store/ducks/tweets/contracts/state';
 import { UploadImages } from '../UploadImages';
+import { uploadImage } from '../../utils/uploadImages';
 
 interface AddTweetFormProps {
   classes: ReturnType<typeof useHomeStyles>;
@@ -20,6 +21,11 @@ interface AddTweetFormProps {
 }
 
 const MAX_LENGTH = 280;
+
+export interface ImageObj {
+  blobUrl: string;
+  file: File;
+};
 
 export const AddTweetForm: React.FC<AddTweetFormProps> = ({
   classes,
@@ -30,7 +36,7 @@ export const AddTweetForm: React.FC<AddTweetFormProps> = ({
   const textLimitPercent = Math.round((text.length / 280) * 100);
   const textCount = MAX_LENGTH - text.length;
 
-  const [images, setImages] = useState<string[]>([]);
+  const [images, setImages] = useState<ImageObj[]>([]);
 
   const dispatch = useDispatch();
 
@@ -43,10 +49,19 @@ export const AddTweetForm: React.FC<AddTweetFormProps> = ({
     }
   };
 
-  const handleClickAddTweet = (): void => {
-    dispatch(fetchAddTweet(text));
+  const handleClickAddTweet = async (): Promise<void> => {
+    let result = [];
+    dispatch(setAddFormState(AddFormState.LOADING));
+    for (let i = 0; i < images.length; i++) {
+      const file = images[i].file;
+      const { url } = await uploadImage(file);
+      result.push(url);
+    }
+    dispatch(fetchAddTweet({ text, images: result }));
     setText('');
+    setImages([]);
   };
+
 
 
   return (

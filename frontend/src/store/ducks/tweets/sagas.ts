@@ -18,9 +18,9 @@ export function* fetchTweetsRequest() {
 };
 
 //создаю новый генератор
-export function* fetchAddTweetRequest({payload: text}:FetchAddTweetsActionInterface) {
+export function* fetchAddTweetRequest({payload}:FetchAddTweetsActionInterface) {
     try{
-        const item: Tweet = yield call(TweetsApi.addTweet, text);
+        const item: Tweet = yield call(TweetsApi.addTweet, payload);
         //добавляю их в редакс
         //yield put - это как dispath в редаксе
         yield put(addTweet(item));

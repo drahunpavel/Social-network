@@ -12,12 +12,15 @@ import { formatDate } from '../../utils/formatDate';
 import format from 'date-fns/format';
 import ruLang from 'date-fns/locale/ru'
 import MoreVertIcon from '@material-ui/icons/MoreVert'
+import { ImageList } from '../ImageList';
+import { ImageObj } from '../AddTweetForm';
 
 interface TweetProps {
   _id: string,
   text: string;
   classes: ReturnType<typeof useHomeStyles>;
   createdAt: string,
+  images?: ImageObj[],
   user: {
     fullname: string;
     username: string;
@@ -32,7 +35,8 @@ export const Tweet: React.FC<TweetProps> = ({
   user,
   classes,
   createdAt,
-  isTweetView
+  isTweetView,
+  images
 }: TweetProps): React.ReactElement => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -58,7 +62,6 @@ export const Tweet: React.FC<TweetProps> = ({
   };
 
 
-
   return (
     <div onClick={handleClickTweet} className={classes.tweetWrapper}>
       <Paper className={classNames(classes.tweet, classes.tweetsHeader)} variant="outlined">
@@ -76,6 +79,7 @@ export const Tweet: React.FC<TweetProps> = ({
               </Typography>
               <Typography className={classes.fullTweetViewText} gutterBottom>
                 {text}
+                {images && <ImageList classes={classes} images={images} />}
               </Typography>
               <Typography className={classes.fullTweetViewHeader}>
                 <span className={classes.tweetUserName}>{format(new Date(createdAt), 'H:mm:ss', { locale: ruLang })}&nbsp;&nbsp;{format(new Date(createdAt), 'dd MMM yyyy г.', { locale: ruLang })}</span>
@@ -91,6 +95,7 @@ export const Tweet: React.FC<TweetProps> = ({
               </Typography>
               <Typography variant="body1" gutterBottom>
                 {text}
+                {images && <ImageList classes={classes} images={images} />}
               </Typography>
             </Fragment>
           }

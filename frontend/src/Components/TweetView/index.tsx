@@ -17,7 +17,7 @@ export const TweetView: React.FC = (): React.ReactElement | null => {
   const isLoading = useSelector(selectIsTweetLoading);
   const tweetData = useSelector(selectTweetItems);
   //params - параметры из урла
-  const params: {id?: string} = useParams();
+  const params: { id?: string } = useParams();
   const id = params.id;
 
   useEffect(() => {
@@ -41,10 +41,9 @@ export const TweetView: React.FC = (): React.ReactElement | null => {
   }
 
   if (tweetData) {
-    return <Tweet classes={classes} {...tweetData} isTweetView={true}/>;
+    return <Tweet classes={classes} {...tweetData} isTweetView={true} />;
   }
 
   return null;
 };
 
- 

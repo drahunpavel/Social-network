@@ -18,6 +18,7 @@ export interface Tweet {
     _id: string,
     text: string;
     createdAt: string,
+    images?: [],
     user: {
       fullname: string;
       username: string;

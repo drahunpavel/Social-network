@@ -19,7 +19,7 @@ export interface SetTweetsActionInterface extends Action<TweetsActionsType> {
 export interface FetchAddTweetsActionInterface extends Action<TweetsActionsType> {
     type: TweetsActionsType.FETCH_ADD_TWEET;
     // payload: Tweet;
-    payload: string;
+    payload: {text: string, images: string[]};
 };
 
 export interface AddTweetsActionInterface extends Action<TweetsActionsType> {

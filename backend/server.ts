@@ -4,6 +4,7 @@ dotenv.config();
 
 import express from "express";
 import multer from 'multer';
+// import bodyParser from "body-parser";
 
 import "./core/db";
 
@@ -15,6 +16,7 @@ import { registerValidations } from "./validations/register";
 import { createTweetValidations } from './validations/createTweets';
 import { updateTweetValidations } from './validations/updateTweets';
 import { passport } from "./core/passport";
+
 
 
 
@@ -32,10 +34,14 @@ const app = express();
 // })
  
 // const upload = multer({ storage: storage });
+// const upload = multer({ dest: 'uploads/' });
 
-const upload = multer({ dest: 'uploads/' })
+const storage = multer.memoryStorage();
+const upload = multer({ storage });
+
 
 app.use(express.json());
+// app.use(bodyParser.urlencoded({ extended: true }));
 app.use(passport.initialize());
 
 app.get("/users", UserController.index);
@@ -58,7 +64,8 @@ app.post(
   UserController.afterLogin
 );
 
-app.post('/upload', upload.single('avatar'), UploadFileController.upload); 
+app.post('/upload', upload.single('image'), UploadFileController.upload); 
+
 
 app.listen(process.env.PORT, (): void => {
   // if(err){

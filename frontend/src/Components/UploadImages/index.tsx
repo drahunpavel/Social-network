@@ -1,12 +1,14 @@
 import React, { useRef, useEffect, useState, useCallback } from 'react';
 import ImageOutlinedIcon from '@material-ui/icons/ImageOutlined';
-import RemoveCircleIcon from '@material-ui/icons/RemoveCircle';
+
 import { IconButton } from '@material-ui/core';
 import { useHomeStyles } from '../../pages/Home/theme';
+import { ImageObj } from '../AddTweetForm';
+import { ImageList } from '../ImageList';
 
-interface UploadImagesProps {
-    images: string[];
-    onChangeImages: (callback: (prev: string[]) => string[]) => void;
+export interface UploadImagesProps {
+    images: ImageObj[];
+    onChangeImages: (callback: (prev: ImageObj[]) => ImageObj[]) => void;
 };
 
 export const UploadImages: React.FC<UploadImagesProps> = ({
@@ -29,13 +31,16 @@ export const UploadImages: React.FC<UploadImagesProps> = ({
             const file = target.files?.[0];
             if (file) {
                 const fileObj = new Blob([file]);
-                onChangeImages(prev => [...prev, URL.createObjectURL(fileObj)]);
+                onChangeImages(prev => [...prev, {
+                    blobUrl: URL.createObjectURL(fileObj),
+                    file
+                }]);
             };
         };
     }, []);
 
     const removeImage = (url: string) => {
-        onChangeImages(prev => prev.filter(_url => _url !== url));
+        onChangeImages(prev => prev.filter(obj => obj.blobUrl !== url));
     };
 
     useEffect(() => {
@@ -53,16 +58,7 @@ export const UploadImages: React.FC<UploadImagesProps> = ({
 
     return (
         <div>
-            <div className={classes.imageList}>
-                {images.map((url, index) => (
-                    <div key={index} className={classes.imageListItem}>
-                        <img src={url} alt='photo' />
-                        <IconButton className={classes.removeIcon} onClick={(): void => removeImage(url)} >
-                            <RemoveCircleIcon style={{ fontSize: 14 }} />
-                        </IconButton>
-                    </div>
-                ))}
-            </div>
+            <ImageList images={images.map(obj => obj.blobUrl)} classes={classes} removeImage={removeImage} />
             <IconButton onClick={handleClickImage} color="primary">
                 <ImageOutlinedIcon style={{ fontSize: 26 }} />
             </IconButton>

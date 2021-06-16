@@ -77,11 +77,10 @@ export const Home = (): React.ReactElement => {
                 </div>
               ) : (
                 tweets.map((tweet, idx) => (
-                  <Tweet key={tweet._id} classes={classes} {...tweet} isTweetView={false} />
+                  <Tweet key={tweet._id} classes={classes} {...tweet} images={tweet.images} isTweetView={false} />
                 ))
               )}
             </Route>
-
             <Route path="/home/tweet/:id" component={TweetView} exact />
 
           </Paper>
