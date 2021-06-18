@@ -51,6 +51,7 @@ app.get("/users/:id", UserController.show);
 
 app.get('/tweets', TweetController.index);
 app.get('/tweets/:id', TweetController.show);
+app.get('/tweets/user/:id', TweetController.getUserTweets);
 app.delete('/tweets/:id',passport.authenticate('jwt'), TweetController.delete);
 app.post('/tweets', passport.authenticate('jwt'), createTweetValidations, TweetController.create); 
 app.patch('/tweets/:id', passport.authenticate('jwt'), updateTweetValidations, TweetController.update); 

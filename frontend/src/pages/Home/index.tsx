@@ -51,7 +51,7 @@ export const Home = (): React.ReactElement => {
           <Typography variant="h6">Все посты</Typography>
         </Route>
         <Route path="/home/tweet">
-          <Typography variant="h6">Комментировать</Typography>
+          <Typography variant="h6">Просмотр поста</Typography>
         </Route>
       </Paper>
       {/* //todo разобраться с данным функционалом */}

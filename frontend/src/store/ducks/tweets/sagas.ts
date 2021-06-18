@@ -6,8 +6,10 @@ import { FetchAddTweetsActionInterface, RemoveTweetActionInterface, TweetsAction
 
 export function* fetchTweetsRequest() {
     try{
+        const pathname = window.location.pathname;
+        const userId = pathname.includes('/user') ? pathname.split('/').pop() : undefined;
         //получаю массив твитов
-        const items: Tweet[] = yield call(TweetsApi.fetchTweets);
+        const items: Tweet[] = yield call(TweetsApi.fetchTweets, userId);
         //добавляю их в редакс
         //yield put - это как dispath в редаксе
         yield put(setTweets(items));

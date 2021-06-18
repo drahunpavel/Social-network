@@ -1,3 +1,5 @@
+import { User } from "../../user/contracts/state";
+
 //описываю состояние загрузки твитов
 export enum LoadingState {
     LOADED = 'LOADED',
@@ -19,11 +21,7 @@ export interface Tweet {
     text: string;
     createdAt: string,
     images?: [],
-    user: {
-      fullname: string;
-      username: string;
-      avatarUrl: string;
-    };
+    user: User;
 };
 
 

@@ -16,6 +16,8 @@ import { ModalBlock } from '../ModalBlock';
 import { AddTweetForm } from '../AddTweetForm';
 import { Link } from 'react-router-dom';
 import { UserSideProfile } from '../UserSideProfile';
+import { useSelector } from 'react-redux';
+import { selectUserData } from '../../store/ducks/user/selectors';
 
 interface SideMenuProps {
   classes: ReturnType<typeof useHomeStyles>;
@@ -26,6 +28,7 @@ export const SideMenu: React.FC<SideMenuProps> = ({
 }) => {
 
   const [visibleAddTweet, setSetVisibleAddTweet] = React.useState<boolean>(false);
+  const userData = useSelector(selectUserData);
 
   const handleClickOpenAddTweet = () => {
     setSetVisibleAddTweet(true);
@@ -51,7 +54,7 @@ export const SideMenu: React.FC<SideMenuProps> = ({
             <Hidden smDown>
               <Typography className={classes.sideMenuListItemLabel} variant="h6">
                 Поиск
-            </Typography>
+              </Typography>
             </Hidden>
           </div>
         </li>
@@ -61,7 +64,7 @@ export const SideMenu: React.FC<SideMenuProps> = ({
             <Hidden smDown>
               <Typography className={classes.sideMenuListItemLabel} variant="h6">
                 Уведомления
-            </Typography>
+              </Typography>
             </Hidden>
           </div>
         </li>
@@ -72,7 +75,7 @@ export const SideMenu: React.FC<SideMenuProps> = ({
             <Hidden smDown>
               <Typography className={classes.sideMenuListItemLabel} variant="h6">
                 Сообщения
-            </Typography>
+              </Typography>
             </Hidden>
           </div>
         </li>
@@ -83,7 +86,7 @@ export const SideMenu: React.FC<SideMenuProps> = ({
             <Hidden smDown>
               <Typography className={classes.sideMenuListItemLabel} variant="h6">
                 Закладки
-            </Typography>
+              </Typography>
             </Hidden>
           </div>
         </li>
@@ -94,20 +97,22 @@ export const SideMenu: React.FC<SideMenuProps> = ({
             <Hidden smDown>
               <Typography className={classes.sideMenuListItemLabel} variant="h6">
                 Список
-            </Typography>
+              </Typography>
             </Hidden>
           </div>
         </li>
         <li className={classes.sideMenuListItem}>
-          <div>
-            <UserIcon className={classes.sideMenuListItemIcon} />
+          <Link to={`/user/${userData?._id}`}>
+            <div>
+              <UserIcon className={classes.sideMenuListItemIcon} />
 
-            <Hidden smDown>
-              <Typography className={classes.sideMenuListItemLabel} variant="h6">
-                Профиль
-            </Typography>
-            </Hidden>
-          </div>
+              <Hidden smDown>
+                <Typography className={classes.sideMenuListItemLabel} variant="h6">
+                  Профиль
+                </Typography>
+              </Hidden>
+            </div>
+          </Link>
         </li>
         <li className={classes.sideMenuListItem}>
           <Button

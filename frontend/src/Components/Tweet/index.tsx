@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import classNames from 'classnames';
 import CommentIcon from '@material-ui/icons/ChatBubbleOutlineOutlined';
 import RepostIcon from '@material-ui/icons/RepeatOutlined';
@@ -18,6 +18,7 @@ import mediumZoom from 'medium-zoom'
 import { selectIsTweetLoading } from '../../store/ducks/tweet/selectors';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeTweet } from '../../store/ducks/tweets/actionCreators';
+import { User } from '../../store/ducks/user/contracts/state';
 
 interface TweetProps {
   _id: string,
@@ -25,11 +26,7 @@ interface TweetProps {
   classes: ReturnType<typeof useHomeStyles>;
   createdAt: string,
   images?: ImageObj[],
-  user: {
-    fullname: string;
-    username: string;
-    avatarUrl: string;
-  };
+  user: User
   isTweetView: boolean;
 }
 
@@ -90,14 +87,14 @@ export const Tweet: React.FC<TweetProps> = ({
       <Paper className={classNames(classes.tweet, classes.tweetsHeader)} variant="outlined">
         <Avatar
           className={classes.tweetAvatar}
-          alt={`Аватарка пользователя ${user.fullname}`}
-          src={user.avatarUrl}
+          // alt={`Аватарка пользователя ${user.fullname}`}
+          src={'user.avatarUrl'}
         />
         <div>
           {isTweetView ?
             <Fragment>
               <Typography className={classes.fullTweetViewHeader}>
-                <b>{user.fullname}</b>
+                <Link to={`/user/${user._id}`}><b>{user.fullname}</b></Link>
                 <span className={classes.tweetUserName}>@{user.username}&nbsp;·&nbsp;{formatDate(new Date(createdAt))}</span>
               </Typography>
               <Typography className={classes.fullTweetViewText} gutterBottom>
@@ -163,10 +160,10 @@ export const Tweet: React.FC<TweetProps> = ({
               >
                 <MenuItem onClick={handleClose}>
                   Редактировать
-                  </MenuItem>
+                </MenuItem>
                 <MenuItem onClick={handleRemove}>
                   Удалить
-                  </MenuItem>
+                </MenuItem>
               </Menu>
             </div>
           </div>

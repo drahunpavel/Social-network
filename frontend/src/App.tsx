@@ -2,6 +2,7 @@ import { CircularProgress } from '@material-ui/core';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Switch, Route, useHistory } from 'react-router-dom';
+import { ActivatePage } from './Components/ActivatePage';
 
 import { Home } from './pages/Home';
 import { Layout } from './pages/Layout';
@@ -35,7 +36,12 @@ function App() {
     // }
     if (!isAuth && isReady) {
       history.push('/SignIn');
-    } else if (history.location.pathname === '/') {
+    }
+    // else if (history.location.pathname === '/') {
+    //   history.push('/home');
+    // }
+
+    if (history.location.pathname === '/SignIn' && isAuth && isReady) {
       history.push('/home');
     }
   }, [isAuth, isReady]);
@@ -54,6 +60,7 @@ function App() {
   - Поправить меню под постами
   - поправить кнопку удаления (сотавить сверху)
   - добавить смайлики   
+  - Неправильно работает верификация, заходит без статуса true
   */
 
 
@@ -65,7 +72,7 @@ function App() {
         <Layout>
           <Route path="/home" component={Home} />
           <Route path="/user/:id" component={UserPage} exact />
-          {/* <Route path="/user/activate/:hash" component={ActivatePage} exact /> */}
+          <Route path="/user/activate/:hash" component={ActivatePage} exact />
         </Layout>
       </Switch>
 
